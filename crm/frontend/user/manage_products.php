@@ -166,6 +166,7 @@ include("../../backend/config.php");
                                         <!-- <th>Cost Price</th>
                                         <th>SKU Number</th> -->
                                         <th>Quantity</th>
+                                        <th class="text-center" colspan="3">Actions</th>
                                         <!-- <th>Weight</th>
                                         <th>Tag</th> -->
                                         <!-- <th style="font-size: 15px;">Activity Type</th> -->
@@ -235,7 +236,7 @@ include("../../backend/config.php");
                                                     ?>
                                                 </td> -->
                                                 <td>
-                                                    <form action="./product_details.php" method="get">
+                                                    <form action="./product_details.php" method="post">
                                                         <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
                                                         <input type="number" name="active" value="<?php echo $row["active"]; ?>" hidden>
                                                         <input type="text" name="file" value="<?php echo $row["file"]; ?>" hidden>
@@ -258,11 +259,12 @@ include("../../backend/config.php");
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <form action="./edit_product.php" method="get"><input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
+                                                    <form action="./edit_product.php" method="post"><input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
                                                         <input type="number" name="active" value="<?php echo $row["active"]; ?>" hidden> 
                                                         <input type="text" name="file" value="<?php echo $row["file"]; ?>" hidden>
 
                                                         <input type="text" name="title" value="<?php echo $row["title"]; ?>" hidden> 
+                                                        <input type="text" name="category" value="<?php echo $row["category"]; ?>" hidden>
                                                         <input type="text" name="old_file_type" value="<?php echo $row["file_type"]; ?>" hidden>
 
                                                         <input type="text" name="description" value="<?php echo $row["description"]; ?>" hidden>
@@ -278,7 +280,7 @@ include("../../backend/config.php");
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <form id="delete_form" action="../../backend/user/remove_product.php" method="post">
+                                                    <form onsubmit="return confirm_delete()" action="../../backend/user/remove_product.php" method="post">
                                                         <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
                                                         <button class="btn btn-neutral text-danger p-2 delete" style="font-size:12px;display:inline-block;">
                                                         <i class="bi bi-trash"></i>
@@ -320,15 +322,14 @@ include("../../backend/config.php");
         }
     </script>
     <script>
-        let deletes = document.getElementsByClassName('delete');
-        Array.from(deletes).forEach((e)=>{
-            e.addEventListener('click',(event)=>{
-                event.preventDefault();
-                if(confirm("Are you sure?")){
-                    document.getElementById('delete_form').submit();
-                }
-            })
-        })
+        function confirm_delete() {
+            var confirm_del = confirm("Are you sure ?");
+            if (confirm_del == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     </script>
 
     <?php require('./user_components/scripts.php'); ?>

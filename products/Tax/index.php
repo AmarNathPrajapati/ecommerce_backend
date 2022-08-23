@@ -13,8 +13,8 @@
         <!-- Navbar -->
         <div class="container">
             <h1 id="post-title" class="text-center my-5">Tax</h1>
-            <img src="../../crm/documents/products/91Pka1f3yKS63027a254e1813.78455935.jpg" style="max-width:100%; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
-            <p  class="mt-4" style="font-size:20px;text-align:justify";">hg</p>
+            <img src="../../crm/documents/products/Shree_krishna63027d1c74a577.31158256.jpg" style="max-width:100%; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
+            <p  class="mt-4" style="font-size:20px;text-align:justify";">fd</p>
             
         </div>
         <!-- Footer -->

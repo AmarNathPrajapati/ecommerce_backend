@@ -13,8 +13,8 @@
         <!-- Navbar -->
         <div class="container">
             <h1 id="post-title" class="text-center my-5">Detergent Powder</h1>
-            <img src="../../crm/documents/products/download (1)63026ece8ad850.26825720.jpg" style="max-width:100%; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
-            <p  class="mt-4" style="font-size:20px;text-align:justify";">vjjbhjb</p>
+            <img src="../../crm/documents/products/download63034fde3d8054.87807175.jpg" style="max-width:100%; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
+            <p  class="mt-4" style="font-size:20px;text-align:justify";">best detergent</p>
             
         </div>
         <!-- Footer -->

@@ -58,35 +58,35 @@ include("../../backend/config.php");
                             <form class="px-sm-5" action="../../backend/user/edit_product.php"
                             onsubmit="return showloader()" method="post" enctype="multipart/form-data">
  
-                                <input type="number" hidden name="id"  value="<?php echo $_GET["id"];?>">
-                                <input type="text" hidden name="file_old"  value="<?php echo $_GET["file"];?>">
+                                <input type="number" hidden name="id"  value="<?php echo $_POST["id"];?>">
+                                <input type="text" hidden name="file_old"  value="<?php echo $_POST["file"];?>">
                                 
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Product Category</label>
                                     <input readonly type="text" placeholder="Product Category" required class="form-control" id="name" name="category" 
-                                    value="<?php echo $_GET["category"];?>">
+                                    value="<?php echo $_POST["category"];?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Product Title</label>
                                     <input readonly type="text" placeholder="Product Title" required class="form-control" id="name" name="title" 
-                                    value="<?php echo $_GET["title"];?>">
+                                    value="<?php echo $_POST["title"];?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Product Description</label>
                                     <textarea readonly type="text" placeholder="Product Description" required  
-                                    class="form-control" id="description" name="description"><?php echo $_GET["description"];?></textarea>
+                                    class="form-control" id="description" name="description"><?php echo $_POST["description"];?></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Actual Price</label>
-                                    <input readonly value="<?php echo $_GET["actual_price"];?>" type="text" placeholder="Actual Price" required class="form-control" id="name" name="actual_price">
+                                    <input readonly value="<?php echo $_POST["actual_price"];?>" type="text" placeholder="Actual Price" required class="form-control" id="name" name="actual_price">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Sale Price</label>
-                                    <input readonly value="<?php echo $_GET["sale_price"];?>" type="text" placeholder="Sale Price" required class="form-control" id="name" name="sale_price">
+                                    <input readonly value="<?php echo $_POST["sale_price"];?>" type="text" placeholder="Sale Price" required class="form-control" id="name" name="sale_price">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Cost Price</label>
-                                    <input readonly value="<?php echo $_GET["cost_price"];?>" type="text" placeholder="Cost Price" required class="form-control" id="name" name="cost_price">
+                                    <input readonly value="<?php echo $_POST["cost_price"];?>" type="text" placeholder="Cost Price" required class="form-control" id="name" name="cost_price">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Discounted Price</label>
@@ -97,24 +97,24 @@ include("../../backend/config.php");
                                 </div> 
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">SKU Number</label>
-                                    <input readonly value="<?php echo $_GET["sku_number"];?>" type="text" placeholder="SKU Number" required class="form-control" id="name" name="sku_number">
+                                    <input readonly value="<?php echo $_POST["sku_number"];?>" type="text" placeholder="SKU Number" required class="form-control" id="name" name="sku_number">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Quantity</label>
-                                    <input readonly value="<?php echo $_GET["quantity"];?>" type="text" placeholder="Qunatity" required class="form-control" id="name" name="quantity">
+                                    <input readonly value="<?php echo $_POST["quantity"];?>" type="text" placeholder="Qunatity" required class="form-control" id="name" name="quantity">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Weight</label>
-                                    <input readonly value="<?php echo $_GET["weight"];?>" type="text" placeholder="Weight" required class="form-control" id="name" name="weight">
+                                    <input readonly value="<?php echo $_POST["weight"];?>" type="text" placeholder="Weight" required class="form-control" id="name" name="weight">
                                 </div>
                                
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Tag</label>
-                                    <input readonly value="<?php echo $_GET["tag"];?>" type="text" placeholder="Tag" required class="form-control" id="name" name="tag">
+                                    <input readonly value="<?php echo $_POST["tag"];?>" type="text" placeholder="Tag" required class="form-control" id="name" name="tag">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Tag</label>
-                                    <input readonly value="<?php echo $_GET["marketing_angle"];?>" type="text" placeholder="Tag" required class="form-control" id="name" name="tag">
+                                    <input readonly value="<?php echo $_POST["marketing_angle"];?>" type="text" placeholder="Tag" required class="form-control" id="name" name="tag">
                                 </div>
                                
                                 <!-- <div class="mb-3">
@@ -122,13 +122,13 @@ include("../../backend/config.php");
                                     <input type="file"  accept=".png,.jpg,.jpeg,video/*" class="form-control" name="document" id="file">
                                     <p class="text-danger">Only .png,.jpg,.jpeg,.mp4 type file formate and less than 5 mb file is supportted.</p>
                                 </div> -->
-                                <input readonly type="text" name="old_file" hidden readonly value="<?php echo $_GET["file"]; ?>">
-                                <input type="text" name="old_file_type" hidden readonly value="<?php echo $_GET["old_file_type"]; ?>">
+                                <input readonly type="text" name="old_file" hidden readonly value="<?php echo $_POST["file"]; ?>">
+                                <input type="text" name="old_file_type" hidden readonly value="<?php echo $_POST["old_file_type"]; ?>">
 
                                 <select class="form-select mb-3" name="active">
                                     
-                                    <option <?php echo $_GET["active"]==0?"selected":""?> value="0">Inactive</option>
-                                    <option <?php echo $_GET["active"]==1?"selected":""?> value="1">Active</option>
+                                    <option <?php echo $_POST["active"]==0?"selected":""?> value="0">Inactive</option>
+                                    <option <?php echo $_POST["active"]==1?"selected":""?> value="1">Active</option>
                                     
                                 </select>
                             </form>

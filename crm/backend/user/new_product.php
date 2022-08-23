@@ -48,7 +48,7 @@ if (!empty($_POST['post_title']) && !empty($_FILES['document']['name']) ) {
                     $content = '
     <!DOCTYPE html>
     <html lang="en">
-
+ 
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
