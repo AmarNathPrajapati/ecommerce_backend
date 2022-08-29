@@ -42,6 +42,9 @@
             right: 0;
             margin: auto;
         }
+        .side_discount:hover{
+            cursor: pointer;
+        }
     </style>
 
     

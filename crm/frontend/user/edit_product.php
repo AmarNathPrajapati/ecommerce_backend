@@ -67,12 +67,14 @@ include("../../backend/config.php");
                                     <select name="post_category" id="category_name">
                                         <option value="<?php echo $_POST["category"];?>" selected ><?php echo $_POST["category"];?></option>
                                     <?php
-                                     $stmt="SELECT id,service_name,created_at FROM `services` WHERE services.deleted_at IS NULL ORDER BY created_at DESC";
+                                     $stmt="SELECT distinct id,service_name,created_at FROM `services` WHERE services.deleted_at IS NULL ORDER BY created_at DESC";
                                      $sql=mysqli_prepare($conn, $stmt);
                                     $result = mysqli_stmt_execute($sql);
                                     if ($result) {
                                         $data = mysqli_stmt_get_result($sql);
                                         while ($row = mysqli_fetch_array($data)) {
+                                            if($_POST["category"]==$row['service_name'])
+                                            continue;
                                     ?>
                                                 <option value="<?php echo $row['service_name']; ?>"><?php echo $row['service_name']; ?></option>
                                                 <?php

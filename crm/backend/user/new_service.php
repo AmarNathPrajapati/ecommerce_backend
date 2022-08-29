@@ -1,8 +1,6 @@
 <?php
 include('../config.php');
 
-
-
 if (!empty($_POST['service_name'])) {
     $service_name = test_input($_POST["service_name"]);
     $from_location = $_SERVER['HTTP_REFERER'];

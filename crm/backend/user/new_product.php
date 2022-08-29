@@ -3,7 +3,7 @@
 include('../config.php');
 
 $redirect_to="../../frontend/user/manage_products.php";
-if (!empty($_POST['post_title']) && !empty($_FILES['document']['name']) ) {
+if (!empty($_POST['post_title']) && !empty($_POST['post_category']) && !empty($_POST['actual_price']) && !empty($_FILES['document']['name']) ) {
         $file=$_FILES['document'];
         $title=test_input($_POST['post_title']);
         $category=test_input($_POST['post_category']);
@@ -17,7 +17,7 @@ if (!empty($_POST['post_title']) && !empty($_FILES['document']['name']) ) {
         $tag=$_POST["tag"];
         $marketing_angle=$_POST["marketing_angle"];
         $active=$_POST["active"];
-        $fileName=$_FILES['document']['name']; 
+        $fileName=$_FILES['document']['name'];  
         $fileTmpName=$_FILES['document']['tmp_name'];
         $fileSize=$_FILES['document']['size'];
         $fileError=$_FILES['document']['error']; 

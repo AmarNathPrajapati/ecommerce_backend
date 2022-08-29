@@ -117,7 +117,7 @@ include("../../backend/config.php");
                         <div class="row align-items-center">
                             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                 <!-- Title -->
-                                <h1 class="h2 mb-0 ls-tight">Manage Products</h1>
+                                <h1 class="h2 mb-0 ls-tight">Manage Discount on Order</h1>
                             </div>
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
@@ -128,11 +128,11 @@ include("../../backend/config.php");
                                         </span>
                                         <span>Edit</span>
                                     </a> -->
-                                    <a href="./new_product.php" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                    <a href="./new_discount_order.php" class="btn d-inline-flex btn-sm btn-primary mx-1">
                                         <span class=" pe-2">
                                             <i class="bi bi-plus"></i>
                                         </span>
-                                        <span>Add New Product</span>
+                                        <span>Add Discount on Order</span>
                                     </a>
                                 </div>
                             </div>
@@ -155,36 +155,28 @@ include("../../backend/config.php");
                         <div class="card-header">
                             <!-- <h5 class="mb-0">Documents</h5> -->
                         </div>
-                        <div class="table-responsive" style="padding: 30px 18px;">
+                        <div class="table-respo`discount_order`nsive" style="padding: 30px 18px;">
                             <table class="table table-hover table-nowrap" id="myTable" style="border: 0px solid black !important; padding: 30px 2px;">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th>SNO</th>
-                                        <th>Category</th>
-                                        <th>Product Name</th>
-                                        <th>Actual Price</th>
-                                        <th>Sale Price</th>
-                                        <!-- <th>Cost Price</th>
-                                        <th>SKU Number</th> -->
-                                        <th>Quantity</th>
-                                        <th></th>
-                                        <th>Actions</th>
-                                        <th></th>
-                                        <!-- <th>Weight</th>
-                                        <th>Tag</th> -->
-                                        <!-- <th style="font-size: 15px;">Activity Type</th> -->
+                                        <th class="text-center" style="font-size: 12px;">Sno</th>
+                                        <th class="text-center" style="font-size: 12px;">Prodect Name</th>
+                                        <th class="text-center" style="font-size: 12px;">Discount Percentage</th>
+                                        <th class="text-center" style="font-size: 12px;">Currency</th>
+                                        <th class="text-center" style="font-size: 12px;">Discount Value</th>
+                                        <th class="text-center" style="font-size: 12px;">Discount on <br> Tatal Value</th>
+                                        <th class="text-center" style="font-size: 12px;"></th>
+                                        <th class="text-center" style="font-size: 12px;">Action</th>
+                                        <th class="text-center" style="font-size: 12px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     // echo $_GET['document_id12'];
 
-                                    $stmt = "SELECT id,category,title,description,file,file_type,active,created_at,category,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle FROM `product` 
-                                    WHERE deleted_at IS NULL AND active=(?) ORDER BY created_at DESC";
+                                    $stmt = "SELECT id,category,dis_per,currency,dis_value,total_value,start_date,end_date,created_at FROM `discount_order` WHERE discount_order.deleted_at IS NULL ORDER BY created_at DESC";
                                     $sql = mysqli_prepare($conn, $stmt);
 
-                                    mysqli_stmt_bind_param($sql, 'i', $active);
-                                    $active = 1;
                                     $result = mysqli_stmt_execute($sql);
 
                                     if ($result) {
@@ -192,7 +184,7 @@ include("../../backend/config.php");
                                         $sno = 1;
                                         while ($row = mysqli_fetch_array($data)) {
                                     ?>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <td>
                                                     <?php
                                                     echo $sno;
@@ -205,17 +197,17 @@ include("../../backend/config.php");
                                                 </td>
                                                 <td>
                                                     <?php
-                                                    echo $row['title'];
+                                                    echo $row['dis_per'];
                                                     ?>
                                                 </td>
                                                 <td>
                                                     <?php
-                                                    echo $row['actual_price'];
+                                                    echo $row['currency'];
                                                     ?>
                                                 </td>
                                                 <td>
                                                     <?php
-                                                    echo $row['sale_price'];
+                                                    echo $row['dis_value'];
                                                     ?>
                                                 </td>
                                                 <!-- <td>
@@ -230,7 +222,7 @@ include("../../backend/config.php");
                                                 </td> -->
                                                 <td>
                                                     <?php
-                                                    echo $row['quantity'];
+                                                    echo $row['total_value'];
                                                     ?>
                                                 </td>
                                                 <!-- <td>
@@ -244,57 +236,51 @@ include("../../backend/config.php");
                                                     ?>
                                                 </td> -->
                                                 <td>
-                                                    <form action="./product_details.php" method="post">
+                                                    <form action="./discount_order_details.php" method="post">
                                                         <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
-                                                        <input type="number" name="active" value="<?php echo $row["active"]; ?>" hidden>
-                                                        <input type="text" name="file" value="<?php echo $row["file"]; ?>" hidden>
-
                                                         <input type="text" name="category" value="<?php echo $row["category"]; ?>" hidden>
+                                                        <input type="number" name="dis_per" value="<?php echo $row["dis_per"]; ?>" hidden>
 
-                                                        <input type="text" name="title" value="<?php echo $row["title"]; ?>" hidden>
-                                                        <input type="text" name="old_file_type" value="<?php echo $row["file_type"]; ?>" hidden>
-                                                        <input type="text" name="description" value="<?php echo $row["description"]; ?>" hidden>
-                                                        <input type="text" name="actual_price" value="<?php echo $row["actual_price"]; ?>" hidden>
-                                                        <input type="text" name="sale_price" value="<?php echo $row["sale_price"]; ?>" hidden>
-                                                        <input type="text" name="cost_price" value="<?php echo $row["cost_price"]; ?>" hidden>
-                                                        <input type="text" name="sku_number" value="<?php echo $row["sku_number"]; ?>" hidden>
-                                                        <input type="text" name="quantity" value="<?php echo $row["quantity"]; ?>" hidden>
-                                                        <input type="text" name="weight" value="<?php echo $row["weight"]; ?>" hidden>
-                                                        <input type="text" name="tag" value="<?php echo $row["tag"]; ?>" hidden>
-                                                        <input type="text" name="marketing_angle" value="<?php echo $row["marketing_angle"]; ?>" hidden>
+                                                        <input type="text" name="currency" value="<?php echo $row["currency"]; ?>" hidden>
+
+                                                        <input type="number" name="dis_value" value="<?php echo $row["dis_value"]; ?>" hidden>
+                                                        <input type="text" name="total_value" value="<?php echo $row["total_value"]; ?>" hidden>
+                                                        <input type="text" name="start_date" value="<?php echo $row["start_date"]; ?>" hidden>
+
+                                                        <input type="text" name="end_date" value="<?php echo $row["end_date"]; ?>" hidden>
+
+                                                        <input type="text" name="created_at" value="<?php echo $row["created_at"]; ?>" hidden>
 
                                                         <button class="btn btn-primary p-2" type="submit" style="margin-right:7px; font-size:12px; display:inline-block;">View Details</button>
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <form action="./edit_product.php" method="post"><input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
-                                                        <input type="number" name="active" value="<?php echo $row["active"]; ?>" hidden> 
-                                                        <input type="text" name="file" value="<?php echo $row["file"]; ?>" hidden>
-
-                                                        <input type="text" name="title" value="<?php echo $row["title"]; ?>" hidden> 
+                                                    <form action="./edit_discount_order.php" method="post">
+                                                    <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
                                                         <input type="text" name="category" value="<?php echo $row["category"]; ?>" hidden>
-                                                        <input type="text" name="old_file_type" value="<?php echo $row["file_type"]; ?>" hidden>
+                                                        <input type="number" name="dis_per" value="<?php echo $row["dis_per"]; ?>" hidden>
 
-                                                        <input type="text" name="description" value="<?php echo $row["description"]; ?>" hidden>
-                                                        <input type="text" name="actual_price" value="<?php echo $row["actual_price"]; ?>" hidden>
-                                                        <input type="text" name="sale_price" value="<?php echo $row["sale_price"]; ?>" hidden>
-                                                        <input type="text" name="cost_price" value="<?php echo $row["cost_price"]; ?>" hidden>
-                                                        <input type="text" name="sku_number" value="<?php echo $row["sku_number"]; ?>" hidden>
-                                                        <input type="text" name="quantity" value="<?php echo $row["quantity"]; ?>" hidden>
-                                                        <input type="text" name="weight" value="<?php echo $row["weight"]; ?>" hidden>
-                                                        <input type="text" name="tag" value="<?php echo $row["tag"]; ?>" hidden>
-                                                        <input type="text" name="marketing_angle" value="<?php echo $row["marketing_angle"]; ?>" hidden>
+                                                        <input type="text" name="currency" value="<?php echo $row["currency"]; ?>" hidden>
+
+                                                        <input type="number" name="dis_value" value="<?php echo $row["dis_value"]; ?>" hidden>
+                                                        <input type="text" name="total_value" value="<?php echo $row["total_value"]; ?>" hidden>
+                                                        <input type="text" name="start_date" value="<?php echo $row["start_date"]; ?>" hidden>
+
+                                                        <input type="text" name="end_date" value="<?php echo $row["end_date"]; ?>" hidden>
+
+                                                        <input type="text" name="created_at" value="<?php echo $row["created_at"]; ?>" hidden>
+
                                                         <button class="btn btn-warning p-2" type="submit" style="margin-right:7px; font-size:12px; display:inline-block;">Edit</button>
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <form onsubmit="return confirm_delete()" action="../../backend/user/remove_product.php" method="post">
+                                                    <form onsubmit="return confirm_delete()" action="../../backend/user/delete_discount_order.php" method="post">
                                                         <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
                                                         <button class="btn btn-neutral text-danger p-2 delete" style="font-size:12px;display:inline-block;">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
+                                                            <i class="bi bi-trash"></i>
+                                                        </button>
                                                     </form>
-                                                </td>
+                                                </td> 
                                             </tr>
                                     <?php
                                             $sno++;

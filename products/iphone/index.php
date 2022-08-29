@@ -13,8 +13,8 @@
         <!-- Navbar -->
         <div class="container">
             <h1 id="post-title" class="text-center my-5">iphone</h1>
-            <img src="../../crm/documents/products/indian-independence63038052c0aef2.02087432.jpg" style="max-width:100%; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
-            <p  class="mt-4" style="font-size:20px;text-align:justify";">iphone</p>
+            <img src="../../crm/documents/products/91Pka1f3yKS6309881c07d2b7.42007454.jpg" style="max-width:100%; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
+            <p  class="mt-4" style="font-size:20px;text-align:justify";">best iphone</p>
             
         </div>
         <!-- Footer -->

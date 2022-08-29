@@ -47,7 +47,7 @@ include("../../backend/config.php");
                         </div>
 
                     </div>
-                </div>
+                </div> 
             </header> 
             <!-- Main -->
             <main class="py-6 bg-surface-secondary">

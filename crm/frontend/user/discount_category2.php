@@ -108,17 +108,58 @@ include("../../backend/config.php");
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New Category</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Select Category for Discount</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="../..//backend/user/new_service.php" method="post" enctype="multipart/form-data">
+                    <form action="../../backend/user/new_discount_category.php" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
-                            <input type="text" name="service_name" class="form-control " required id="" placeholder="Enter Category Name">
-                            <div class="mb-2">
-                                <label class="form-label" for="file">Category image</label>
-                                <input type="file" accept=".png,.jpg,.jpeg/*" class="form-control" name="document" id="file">
-                                <p class="text-danger">Only .png,.jpg,.jpeg,type file formate and less than 5 mb file is supportted.</p>
+                            <div class="mb-3">
+                                <label for="category_name" class="form-label">Product Category</label><br>
+                                <!-- dynamic categories -->
+                                <select required name="category" id="category_name">
+                                    <option disabled selected>Select Categories</option>
+                                    <?php
+                                    $stmt = "SELECT id,service_name,created_at FROM `services` WHERE services.deleted_at IS NULL ORDER BY created_at DESC";
+                                    $sql = mysqli_prepare($conn, $stmt);
+                                    $result = mysqli_stmt_execute($sql);
+                                    if ($result) {
+                                        $data = mysqli_stmt_get_result($sql);
+                                        while ($row = mysqli_fetch_array($data)) {
+                                    ?>
+                                            <option value="<?php echo $row['service_name']; ?>"><?php echo $row['service_name']; ?></option>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
                             </div>
+                            <label for="">Discount in %</label>
+                            <input name="dis_per" type="text" class="form-control " required id="" placeholder="Enter Percentage Value">
+                            <label for="currency" class="form-label">Select Currency</label><br>
+                            <!-- dynamic categories -->
+                            <select name="currency" id="currency">
+                                <?php
+                                $stmt = "SELECT service_name,currency_symbol FROM `currency` WHERE currency.deleted_at IS NULL ORDER BY created_at DESC";
+                                $sql = mysqli_prepare($conn, $stmt);
+                                $result = mysqli_stmt_execute($sql);
+                                if ($result) {
+                                    $data = mysqli_stmt_get_result($sql);
+                                    while ($row = mysqli_fetch_array($data)) {
+                                ?>
+                                        <option value="<?php echo $row['service_name'] . " " . $row['currency_symbol']; ?>"><?php echo $row['service_name'] . " " . $row['currency_symbol']; ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select> <br>
+                            <label for="">Discount Value</label>
+                            <input name="dis_value" type="text" class="form-control " required id="" placeholder="Add discount Value">
+                            <label for="">Above a Total value</label>
+                            <input name="total_value" type="text" class="form-control " required id="" placeholder="Enter Total Value">
+                            <label for="">Start Date</label>
+                            <input name="start_date" type="date" class="form-control " required id="" placeholder="Enter Start Date">
+                            <label for="">End Date</label>
+                            <input name="end_date" type="date" class="form-control " required id="" placeholder="Enter End Date">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -137,7 +178,7 @@ include("../../backend/config.php");
                         <div class="row align-items-center">
                             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                 <!-- Title -->
-                                <h1 class="h2 mb-0 ls-tight">Categories</h1>
+                                <h1 class="h2 mb-0 ls-tight">Discount on Category</h1>
                             </div>
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
@@ -146,7 +187,7 @@ include("../../backend/config.php");
                                         <span class=" pe-2">
                                             <i class="bi bi-plus"></i>
                                         </span>
-                                        <span>Add Category</span>
+                                        <span>Add Disount on Category</span>
                                     </a>
                                 </div>
                             </div>
@@ -161,7 +202,7 @@ include("../../backend/config.php");
             <main class="py-6 bg-surface-secondary">
                 <div class="container-fluid">
                     <!-- Card stats -->
-                    <div class="row g-6 mb-6">
+                    <!-- <div class="row g-6 mb-6">
 
                         <div class="col-xl-3 col-sm-6 col-12">
                             <div class="card shadow border-0 overflow_style" style="height: 130px;">
@@ -173,10 +214,6 @@ include("../../backend/config.php");
 
                                             $stmt = "SELECT count(id) FROM `services` WHERE deleted_at IS NULL";
                                             $sql = mysqli_prepare($conn, $stmt);
-
-                                            // $is_admin=2;
-                                            // mysqli_stmt_bind_param($sql,'i',$is_admin);
-
                                             $result = mysqli_stmt_execute($sql);
                                             if ($result) {
                                                 $data = mysqli_stmt_get_result($sql);
@@ -200,8 +237,10 @@ include("../../backend/config.php");
                             </div>
 
                         </div>
-                    </div>
+                    </div> -->
 
+
+                    <!-- include table -->
                     <div class="card shadow border-0 mb-7">
                         <div class="card-header">
                             <h5 class="mb-0">Categories</h5>
@@ -210,18 +249,23 @@ include("../../backend/config.php");
                             <table class="table table-hover table-nowrap" id="myTable" style="padding: 30px 2px; border: 0px solid black !important;">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th style="font-size: 16px;">Sno</th>
-                                        <th style="font-size: 16px;">Category Name</th>
-                                        <th style="font-size: 16px;">Category Image</th>
-                                        <th style="font-size: 16px;">Created At</th>
-                                        <th class="text-center" style="font-size: 16px;">Action</th>
-                                        <th class="text-center" style="font-size: 16px;"></th>
+                                        <th style="font-size: 12px;">Sno</th>
+                                        <th style="font-size: 12px;">Category Name</th>
+                                        <th style="font-size: 12px;">Discount Percentage</th>
+                                        <th style="font-size: 12px;">Currency</th>
+                                        <th style="font-size: 12px;">Discount Value</th>
+                                        <th style="font-size: 12px;">Discount on Tatal Value</th>
+                                        <th style="font-size: 12px;">Discount Start date</th>
+                                        <th style="font-size: 12px;">Discount End Date</th>
+                                        <th style="font-size: 12px;">Created At</th>
+                                        <th class="text-center" style="font-size: 12px;">Action</th>
+                                        <th class="text-center" style="font-size: 12px;"></th>
                                     </tr>
                                 </thead>
                                 <tbody style="border: 0px solid black !important;">
                                     <?php
 
-                                    $stmt = "SELECT id,service_name,file,created_at FROM `services` WHERE services.deleted_at IS NULL ORDER BY created_at DESC";
+                                    $stmt = "SELECT id,category,dis_per,currency,dis_value,total_value,start_date,end_date,created_at FROM `discount_category` WHERE discount_category.deleted_at IS NULL ORDER BY created_at DESC";
                                     $sql = mysqli_prepare($conn, $stmt);
 
                                     // mysqli_stmt_bind_param($sql,'i',$is_admin);
@@ -234,41 +278,61 @@ include("../../backend/config.php");
                                         while ($row = mysqli_fetch_array($data)) {
                                     ?>
                                             <tr>
-                                                <td style="font-size: 14px;">
+                                                <td class="text-center" style="font-size: 14px;">
                                                     <?php echo $sno; ?>
                                                 </td>
-
-                                                <td style="font-size: 14px;">
-                                                    <?php echo $row["service_name"]; ?>
+                                                <td class="text-center" style="font-size: 14px;">
+                                                    <?php echo $row['category']; ?>
+                                                </td>
+                                                <td class="text-center" style="font-size: 14px;">
+                                                    <?php echo $row['dis_per']; ?>
+                                                </td>
+                                                <td class="text-center" style="font-size: 14px;">
+                                                    <?php echo $row['currency']; ?>
+                                                </td>
+                                                <td class="text-center" style="font-size: 14px;">
+                                                    <?php echo $row['dis_value']; ?>
+                                                </td>
+                                                <td class="text-center" style="font-size: 14px;">
+                                                    <?php echo $row['total_value']; ?>
+                                                </td>
+                                                <td class="text-center" style="font-size: 14px;">
+                                                    <?php echo $row['start_date']; ?>
+                                                </td>
+                                                <td class="text-center" style="font-size: 14px;">
+                                                    <?php echo $row['end_date']; ?>
+                                                </td>
+                                                <td class="text-center" style="font-size: 14px;">
+                                                    <?php echo $row['created_at']; ?>
                                                 </td>
 
-                                                <td style="font-size: 14px;">
-                                                    <div class="modal-body">
-                                                        <img width="40px" src="<?php echo '../../documents/category/' . $row['file'] ?>" alt="">
-                                                    </div>
-                                                </td>
+                                                <td>
+                                                    <form action="./product_details.php" method="post">
+                                                        <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
+                                                        <input type="number" name="active" value="<?php echo $row["category"]; ?>" hidden>
+                                                        <input type="text" name="file" value="<?php echo $row["dis_per"]; ?>" hidden>
 
-                                                <td class="overflow_style2" style="font-size: 14px;">
-                                                    <?php echo $row["created_at"]; ?>
-                                                </td>
+                                                        <input type="text" name="category" value="<?php echo $row["currency"]; ?>" hidden>
 
-                                                <td >
+                                                        <input type="text" name="title" value="<?php echo $row["dis_value"]; ?>" hidden>
+                                                        <input type="text" name="old_file_type" value="<?php echo $row["total_value"]; ?>" hidden>
+                                                        <input type="text" name="description" value="<?php echo $row["start_date"]; ?>" hidden>
+                                                        <input type="text" name="actual_price" value="<?php echo $row["end_date"]; ?>" hidden>
+                                                        <input type="text" name="sale_price" value="<?php echo $row["created_at"]; ?>" hidden>
 
-                                                    <button type="submit" class="btn btn-outline-primary text-danger-hover p-2" onclick="setId(<?php echo $row['id']; ?>,'<?php echo $row['service_name']; ?>')" style="font-size: 14px; margin-left: 10px;">
-                                                        <span style="font-size: 14px;">Edit</span>
-                                                    </button>
+                                                        <button class="btn btn-primary p-2" type="submit" style="margin-right:7px; font-size:12px; display:inline-block;">View Details</button>
+                                                    </form>
                                                 </td>
                                                 <td>
                                                     <!-- Button trigger modal -->
                                                     <form action="../../backend/user/delete_service.php" onsubmit="return confirm_delete()" method="post">
                                                         <input type="number" hidden name="service_id" value="<?php echo $row['id']; ?>">
-                                                        <button type="submit" class="btn btn-outline-danger text-danger-hover p-2" style="font-size: 14px; margin-left: 10px;">
+                                                        <button type="submit" class="btn btn-outline-danger text-danger-hover p-2" style="font-size: 10px; margin-left: 10px;">
 
                                                             <span style="font-size: 14px;">Delete</span>
                                                         </button>
                                                     </form>
                                                 </td>
-
                                             </tr>
                                     <?php
                                             $sno++;
@@ -295,7 +359,7 @@ include("../../backend/config.php");
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit discount on Category</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="../..//backend/user/edit_service.php" method="post" enctype="multipart/form-data">
@@ -307,11 +371,33 @@ include("../../backend/config.php");
                         <div class="mb-2">
                             <input type="text" name="service_name" class="form-control edit service_name" required id="" placeholder="Enter Category Name">
                         </div>
-                        <div class="mb-2">
-                            <label class="form-label" for="file">Category image</label>
-                            <input type="file" accept=".png,.jpg,.jpeg/*" class="form-control" name="document" id="file">
-                            <p class="text-danger">Only .png,.jpg,.jpeg,type file formate and less than 5 mb file is supportted.</p>
-                        </div>
+                        <label for="">Discount in %</label>
+                        <input name="dis_per" type="text" class="form-control " required id="" placeholder="Enter Percentage Value">
+                        <label for="currency" class="form-label">Select Currency</label><br>
+
+                        <select name="currency" id="currency">
+                            <?php
+                            $stmt1 = "SELECT service_name,currency_symbol FROM `currency` WHERE currency.deleted_at IS NULL ORDER BY created_at DESC";
+                            $sql1 = mysqli_prepare($conn, $stmt1);
+                            $result1 = mysqli_stmt_execute($sql1);
+                            if ($result1) {
+                                $data1 = mysqli_stmt_get_result($sql1);
+                                while ($row1 = mysqli_fetch_array($data1)) {
+                            ?>
+                                    <option value="<?php echo $row1['service_name'] . " " . $row1['currency_symbol']; ?>"><?php echo $row1['service_name'] . " " . $row1['currency_symbol']; ?></option>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                        <label for="">Discount Value</label>
+                        <input name="dis_value" type="text" class="form-control " required id="" placeholder="Add discount Value">
+                        <label for="">Above a Total value</label>
+                        <input name="total_value" type="text" class="form-control " required id="" placeholder="Enter Total Value">
+                        <label for="">Start Date</label>
+                        <input name="start_date" type="date" class="form-control " required id="" placeholder="Enter Start Date">
+                        <label for="">End Date</label>
+                        <input name="end_date" type="date" class="form-control " required id="" placeholder="Enter End Date">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -151,7 +151,7 @@ include("../../backend/config.php");
                                         echo mysqli_error($conn);
                                     }
 
-                                    ?>
+                                    ?> 
 
                                 </tbody>
                             </table>

@@ -62,7 +62,7 @@ include("../../backend/config.php");
                                 <div class="mb-3">
                                     <label for="category_name" class="form-label">Product Category</label><br>
                                     <!-- dynamic categories -->
-                                    <select name="post_category" id="category_name">
+                                    <select required name="post_category" id="category_name">
                                         <option disabled selected >Select Categories</option>
                                     <?php
                                      $stmt="SELECT id,service_name,created_at FROM `services` WHERE services.deleted_at IS NULL ORDER BY created_at DESC";
@@ -81,23 +81,42 @@ include("../../backend/config.php");
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Product Title</label>
-                                    <input type="text" placeholder="Title" required class="form-control" id="name" name="post_title">
+                                    <input required type="text" placeholder="Title"  class="form-control" id="name" name="post_title">
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Product Description</label>
                                     <textarea type="text" placeholder="Description" class="form-control" rows="3" id="description" name="post_description"></textarea>
                                 </div>
                                 <div class="mb-3">
+                                    <label for="currency" class="form-label">Select Currency</label><br>
+                                    <!-- dynamic categories -->
+                                    <select name="post_currency" id="currency">
+                                    <?php
+                                     $stmt="SELECT service_name FROM `currency` WHERE currency.deleted_at IS NULL ORDER BY created_at DESC";
+                                     $sql=mysqli_prepare($conn, $stmt);
+                                    $result = mysqli_stmt_execute($sql);
+                                    if ($result) {
+                                        $data = mysqli_stmt_get_result($sql);
+                                        while ($row = mysqli_fetch_array($data)) {
+                                    ?>
+                                                <option value="<?php echo $row['service_name']; ?>"><?php echo $row['service_name']; ?></option>
+                                                <?php
+                                        }
+                                    }
+                                    ?>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
                                     <label for="doc_name" class="form-label">Actual Price</label>
-                                    <input type="text" placeholder="Actual Price" required class="form-control" id="name" name="actual_price">
+                                    <input required type="number" placeholder="Actual Price"  class="form-control" id="name" name="actual_price">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Sale Price</label>
-                                    <input type="text" placeholder="Sale Price" required class="form-control" id="name" name="sale_price">
+                                    <input type="number" placeholder="Sale Price"  class="form-control" id="name" name="sale_price">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Cost Price</label>
-                                    <input type="text" placeholder="Cost Price" required class="form-control" id="name" name="cost_price">
+                                    <input type="number" placeholder="Cost Price"  class="form-control" id="name" name="cost_price">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Discounted Price</label>
@@ -108,27 +127,36 @@ include("../../backend/config.php");
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">SKU Number</label>
-                                    <input type="text" placeholder="SKU Number" required class="form-control" id="name" name="sku_number">
+                                    <input type="text" placeholder="SKU Number"  class="form-control" id="name" name="sku_number">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Quantity</label>
-                                    <input type="text" placeholder="Qunatity" required class="form-control" id="name" name="quantity">
+                                    <input type="text" placeholder="Qunatity"  class="form-control" id="name" name="quantity">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="doc_name" class="form-label">Select weight in</label>
+                                    <select name="" id="">
+                                        <option value="Kg">Kg</option>
+                                        <option value="gram">gram</option>
+                                        <option value="mg">mg</option>
+                                    </select>
+                                    
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Weight</label>
-                                    <input type="text" placeholder="Weight" required class="form-control" id="name" name="weight">
+                                    <input type="number" placeholder="Weight"  class="form-control" id="name" name="weight">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Shippable Products to all pincodes</label>
-                                    <input type="text" placeholder="pincode" required class="form-control" id="name" name="pincode">
+                                    <input type="text" placeholder="pincode"  class="form-control" id="name" name="pincode">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Tag</label>
-                                    <input type="text" placeholder="Tag" required class="form-control" id="name" name="tag">
+                                    <input type="text" placeholder="Tag"  class="form-control" id="name" name="tag">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Marketing Angle</label>
-                                    <input type="text" placeholder="Marketing Angle" required class="form-control" id="name" name="marketing_angle">
+                                    <input type="text" placeholder="Marketing Angle"  class="form-control" id="name" name="marketing_angle">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="file">Product image/video</label>
