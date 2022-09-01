@@ -117,7 +117,7 @@ include("../../backend/config.php");
                         <div class="row align-items-center">
                             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                 <!-- Title -->
-                                <h1 class="h2 mb-0 ls-tight">Manage Discount on Order</h1>
+                                <h1 class="h2 mb-0 ls-tight">Manage Freeship on Order</h1>
                             </div>
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
@@ -128,11 +128,11 @@ include("../../backend/config.php");
                                         </span>
                                         <span>Edit</span>
                                     </a> -->
-                                    <a href="./new_discount_order.php" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                    <a href="./new_freeship_onorder.php" class="btn d-inline-flex btn-sm btn-primary mx-1">
                                         <span class=" pe-2">
                                             <i class="bi bi-plus"></i>
                                         </span>
-                                        <span>Add Discount on Order</span>
+                                        <span>Add Freeship on Order</span>
                                     </a>
                                 </div>
                             </div>
@@ -160,11 +160,10 @@ include("../../backend/config.php");
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="text-center" style="font-size: 12px;">Sno</th>
-                                        <th class="text-center" style="font-size: 12px;">Prodect Name</th>
-                                        <th class="text-center" style="font-size: 12px;">Discount Percentage</th>
+                                        <th class="text-center" style="font-size: 12px;">ProdUct Name</th>
+                                        <th class="text-center" style="font-size: 12px;">Minimum Order</th>
                                         <th class="text-center" style="font-size: 12px;">Currency</th>
-                                        <th class="text-center" style="font-size: 12px;">Discount Value</th>
-                                        <th class="text-center" style="font-size: 12px;">Discount on <br> Tatal Value</th>
+                                        <th class="text-center" style="font-size: 12px;">Freeship on <br> Tatal Value</th>
                                         <th class="text-center" style="font-size: 12px;"></th>
                                         <th class="text-center" style="font-size: 12px;">Action</th>
                                         <th class="text-center" style="font-size: 12px;"></th>
@@ -174,7 +173,7 @@ include("../../backend/config.php");
                                     <?php
                                     // echo $_GET['document_id12'];
 
-                                    $stmt = "SELECT id,category,dis_per,currency,dis_value,total_value,start_date,end_date,created_at FROM `discount_order` WHERE discount_order.deleted_at IS NULL ORDER BY created_at DESC";
+                                    $stmt = "SELECT id,category,dis_per,currency,dis_value,total_value,start_date,end_date,created_at FROM `freeship` WHERE freeship.deleted_at IS NULL ORDER BY created_at DESC";
                                     $sql = mysqli_prepare($conn, $stmt);
 
                                     $result = mysqli_stmt_execute($sql);
@@ -195,19 +194,15 @@ include("../../backend/config.php");
                                                     echo $row['category'];
                                                     ?>
                                                 </td>
+                                               
                                                 <td>
                                                     <?php
-                                                    echo $row['dis_per'];
+                                                    echo $row['dis_value'];
                                                     ?>
                                                 </td>
                                                 <td>
                                                     <?php
                                                     echo $row['currency'];
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    echo $row['dis_value'];
                                                     ?>
                                                 </td>
                                                 <!-- <td>
@@ -236,7 +231,7 @@ include("../../backend/config.php");
                                                     ?>
                                                 </td> -->
                                                 <td>
-                                                    <form action="./discount_order_details.php" method="post">
+                                                    <form action="./freeship_onorder_details.php" method="post">
                                                         <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
                                                         <input type="text" name="category" value="<?php echo $row["category"]; ?>" hidden>
                                                         <input type="number" name="dis_per" value="<?php echo $row["dis_per"]; ?>" hidden>
@@ -255,7 +250,7 @@ include("../../backend/config.php");
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <form action="./edit_discount_order.php" method="post">
+                                                    <form action="./edit_freeship_onorder.php" method="post">
                                                     <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
                                                         <input type="text" name="category" value="<?php echo $row["category"]; ?>" hidden>
                                                         <input type="number" name="dis_per" value="<?php echo $row["dis_per"]; ?>" hidden>
@@ -274,7 +269,7 @@ include("../../backend/config.php");
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <form onsubmit="return confirm_delete()" action="../../backend/user/delete_discount_order.php" method="post">
+                                                    <form onsubmit="return confirm_delete()" action="../../backend/user/delete_freeship_onorder.php" method="post">
                                                         <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
                                                         <button class="btn btn-neutral text-danger p-2 delete" style="font-size:12px;display:inline-block;">
                                                             <i class="bi bi-trash"></i>

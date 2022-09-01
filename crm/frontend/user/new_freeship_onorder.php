@@ -14,7 +14,7 @@ include("../../backend/config.php");
 
     <?php require('./user_components/header_links.php'); ?>
     <link rel="stylesheet" href="./css/new_document.css">
-    <title>Add Discount on Category</title>
+    <title>Add Freeship on Order</title>
 </head>
 
 <body>
@@ -35,7 +35,7 @@ include("../../backend/config.php");
                         <div class="row align-items-center">
                             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                 <!-- Title -->
-                                <h1 class="h2 mb-0 ls-tight mb-3">Add Discount on Category</h1>
+                                <h1 class="h2 mb-0 ls-tight mb-3">Add Freeship on Order</h1>
                             </div>
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
@@ -58,7 +58,7 @@ include("../../backend/config.php");
                         </div> -->
 
                         <div class="form-box px-sm-5 mb-5">
-                            <form action="../../backend/user/new_discount_order.php" method="post" enctype="multipart/form-data">
+                            <form action="../../backend/user/new_freeship_onorder.php" method="post" enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="category_name" class="form-label">Product Name</label><br>
@@ -80,8 +80,8 @@ include("../../backend/config.php");
                                             ?>
                                         </select>
                                     </div>
-                                    <label for="">Discount in %</label>
-                                    <input name="dis_per" type="text" class="form-control " required id="" placeholder="Enter Percentage Value">
+                                    <label for="">Freeeship on Minimum Order</label>
+                                    <input name="dis_value" type="text" class="form-control " required id="" placeholder="Add Minimum Order">
                                     <label for="currency" class="form-label">Select Currency</label><br>
                                     <!-- dynamic categories -->
                                     <select name="currency" id="currency">
@@ -99,8 +99,7 @@ include("../../backend/config.php");
                                         }
                                         ?>
                                     </select> <br>
-                                    <label for="">Discount Value</label>
-                                    <input name="dis_value" type="text" class="form-control " required id="" placeholder="Add discount Value">
+                                    
                                     <label for="">Above a Total value</label>
                                     <input name="total_value" type="text" class="form-control " required id="" placeholder="Enter Total Value">
                                     <label for="">Start Date</label>

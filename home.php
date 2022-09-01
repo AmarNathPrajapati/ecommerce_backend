@@ -19,7 +19,12 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!">Start Bootstrap</a>
+            <a class="navbar-brand" href="#!">Hello
+                <?php
+                session_start();
+                echo $_SESSION['username'];
+                ?>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -37,91 +42,11 @@
                         </ul>
                     </li>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Sign Up
-                    </button>
+                    <a href="./crm/backend/user/new_customer_logout.php" type="button" class="btn btn-primary">
+                        logout
+                    </a>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Enter Your Details</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="./crm/backend/user/new_customer.php" method="POST">
-                                        <div class="container-fluid p-5">
-                                            <div class="row">
-                                                <div class="col-md-10 col-12 offset-md-1">
-                                                    <div class="mb-3">
-                                                        <input required placeholder="Name" name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-10 col-12 offset-md-1">
-                                                    <div class="mb-3">
-                                                        <input required placeholder="Phone" name="phone" type="tel" class="form-control" id="phone" aria-describedby="emailHelp">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-10 col-12 offset-md-1">
-                                                <div class="mb-3">
-                                                    <input required placeholder="Email Address" name="email" type="mail" class="form-control" id="subject">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-10 col-12 offset-md-1">
-                                                <div class="mb-3">
-                                                    <input required placeholder="Password" name="password" type="password" class="form-control" id="subject">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 text-md-center">
-                                                <button class="btn btn-primary" type="submit">Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-primary mx-4" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        login
-                    </button>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Enter Your Details</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="./crm/backend/user/new_customer_login.php" method="POST">
-                                        <div class="container-fluid p-5">
-                                            <div class="row">
-                                                <div class="col-md-10 col-12 offset-md-1">
-                                                    <div class="mb-3">
-                                                        <input required placeholder="Name" name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-10 col-12 offset-md-1">
-                                                <div class="mb-3">
-                                                    <input required placeholder="Password" name="password" type="password" class="form-control" id="subject">
-                                                </div>
-                                            </div>
-                                            <div class="col-12 text-md-center">
-                                                <button class="btn btn-primary" type="submit">Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
             </div>
             </ul>
             <form class="d-flex">
@@ -132,6 +57,55 @@
                 </button>
             </form>
         </div>
+        </div>
+    </nav>
+    <!-- categories list -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown mx-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-3">
+                        <img width="100px" src="./91Pka1f3yKS._UX679_.jpg" alt=""> <br>
+                        <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown mx-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <!-- Header-->
