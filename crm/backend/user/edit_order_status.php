@@ -3,15 +3,14 @@ if (!empty($_POST["service_id"]) && !empty($_POST["service_name"])) {
     include('../config.php');
    
     $from_location=$_SERVER['HTTP_REFERER'];
-    $stmt="UPDATE `currency` SET service_name=?, currency_symbol = ? WHERE id=(?)";
+    $stmt="UPDATE `order_status` SET order_status=? WHERE id=(?)";
     $sql=mysqli_prepare($conn, $stmt);
 
     $id=test_input($_POST["service_id"]);
     $service_name=test_input($_POST["service_name"]);
-    $currency_symbol=test_input($_POST["currency_symbol"]);
 
     //binding the parameters to prepard statement
-    mysqli_stmt_bind_param($sql,"ssi",$service_name,$currency_symbol,$id);
+    mysqli_stmt_bind_param($sql,"si",$service_name,$id);
 
     $result=mysqli_stmt_execute($sql);
     if ($result) { 
@@ -22,7 +21,6 @@ if (!empty($_POST["service_id"]) && !empty($_POST["service_name"])) {
             ?>
              <script>
                     window.location.href="<?php echo $from_location; ?>"
-                    
             </script>
             <?php
         

@@ -28,7 +28,7 @@ if (true) {
         </script>
     <?php } else {
         mysqli_stmt_close($sql);
-    ?>
+    ?> 
         <script>
             alert('Sorry Something Went Wrong. Please try again.');
             history.back();

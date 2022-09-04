@@ -13,8 +13,8 @@
         <!-- Navbar -->
         <div class="container">
             <h1 id="post-title" class="text-center my-5">jeans</h1>
-            <img src="../../crm/documents/products/91Pka1f3yKS630d65eed35cf6.51841922.jpg" style="max-width:100%; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
-            <p  class="mt-4" style="font-size:20px;text-align:justify";">very nice product</p>
+            <img src="../../crm/documents/products/mens-branded-heavy-knitted-jeans-thumb6312b55381c199.45273991.jpg" style="max-width:100%; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
+            <p  class="mt-4" style="font-size:20px;text-align:justify";">best jeans</p>
             
         </div>
         <!-- Footer -->

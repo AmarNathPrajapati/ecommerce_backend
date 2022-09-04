@@ -12,7 +12,7 @@ include("../../backend/config.php");
 
 <head>
     <?php require('./user_components/header_links.php'); ?>
-    <title>Manage Categories</title>
+    <title>Manage Order Details</title>
 
     <style>
         .tags {
@@ -104,30 +104,6 @@ include("../../backend/config.php");
 
         <!-- Add Modaal -->
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog ">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New Category</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="../..//backend/user/new_service.php" method="post" enctype="multipart/form-data">
-                        <div class="modal-body">
-                            <input type="text" name="service_name" class="form-control " required id="" placeholder="Enter Category Name">
-                            <div class="mb-2">
-                                <label class="form-label" for="file">Category image</label>
-                                <input type="file" accept=".png,.jpg,.jpeg/*" class="form-control" name="document" id="file">
-                                <p class="text-danger">Only .png,.jpg,.jpeg,type file formate and less than 5 mb file is supportted.</p>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         <!-- Main content -->
         <div class="h-screen flex-grow-1 overflow-y-lg-auto">
             <!-- Header -->
@@ -137,19 +113,9 @@ include("../../backend/config.php");
                         <div class="row align-items-center">
                             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                 <!-- Title -->
-                                <h1 class="h2 mb-0 ls-tight">Categories</h1>
+                                <h1 class="h2 mb-0 ls-tight">Order Details</h1>
                             </div>
-                            <!-- Actions -->
-                            <div class="col-sm-6 col-12 text-sm-end">
-                                <div class="mx-n1">
-                                    <a type="button" class="btn d-inline-flex btn-sm btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        <span class=" pe-2">
-                                            <i class="bi bi-plus"></i>
-                                        </span>
-                                        <span>Add Category</span>
-                                    </a>
-                                </div>
-                            </div>
+                            
                         </div>
                         <!-- Nav -->
                         <ul class="nav nav-tabs mt-4 overflow-x border-0">
@@ -168,10 +134,10 @@ include("../../backend/config.php");
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total Categories</span>
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total Order Details</span>
                                             <?php
 
-                                            $stmt = "SELECT count(id) FROM `services` WHERE deleted_at IS NULL";
+                                            $stmt = "SELECT count(order_id) FROM `order_details` WHERE deleted_at IS NULL";
                                             $sql = mysqli_prepare($conn, $stmt);
 
                                             // $is_admin=2;
@@ -191,9 +157,9 @@ include("../../backend/config.php");
                                             ?>
                                         </div>
                                         <div class="col-auto">
-                                            <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                                                <i class="bi bi-columns-gap"></i>
-                                            </div>
+                                            <!-- <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                                
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -204,24 +170,29 @@ include("../../backend/config.php");
 
                     <div class="card shadow border-0 mb-7">
                         <div class="card-header">
-                            <h5 class="mb-0">Categories</h5>
+                            <h5 class="mb-0">Order Details</h5>
                         </div>
                         <div class="table-responsive" style="padding: 30px 18px;">
                             <table class="table table-hover table-nowrap" id="myTable" style="padding: 30px 2px; border: 0px solid black !important;">
                                 <thead class="thead-light">
                                     <tr>
                                         <th style="font-size: 16px;">Sno</th>
-                                        <th style="font-size: 16px;">Category Name</th>
-                                        <th style="font-size: 16px;">Category Image</th>
-                                        <th style="font-size: 16px;">Created At</th>
-                                        <th class="text-center" style="font-size: 16px;">Action</th>
-                                        <th class="text-center" style="font-size: 16px;"></th>
+                                        <th style="font-size: 16px;">
+                                            Customer Name</th>
+                                        <th style="font-size: 16px;">
+                                            Product Name</th>
+                                        <th style="font-size: 16px;">
+                                            Order <br> Quantity</th>
+                                        <th style="font-size: 16px;">
+                                            Order Status</th>
+                                        <th style="font-size: 16px;">Order time</th>
+                                        <th style="font-size: 16px;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody style="border: 0px solid black !important;">
                                     <?php
 
-                                    $stmt = "SELECT id,service_name,file,created_at FROM `services` WHERE services.deleted_at IS NULL ORDER BY created_at DESC";
+                                    $stmt = "SELECT order_id,user_name,product_name,quantity,order_status,created_at FROM `order_details` WHERE order_details.deleted_at IS NULL ORDER BY created_at DESC";
                                     $sql = mysqli_prepare($conn, $stmt);
 
                                     // mysqli_stmt_bind_param($sql,'i',$is_admin);
@@ -239,36 +210,39 @@ include("../../backend/config.php");
                                                 </td>
 
                                                 <td style="font-size: 14px;">
-                                                    <?php echo $row["service_name"]; ?>
+                                                    <?php echo $row["user_name"]; ?>
                                                 </td>
-
                                                 <td style="font-size: 14px;">
-                                                    <div class="modal-body">
-                                                        <img width="40px" src="<?php echo '../../documents/category/' . $row['file'] ?>" alt="">
-                                                    </div>
+                                                    <?php echo $row["product_name"]; ?>
                                                 </td>
-
+                                                <td style="font-size: 14px;">
+                                                    <?php echo $row["quantity"]; ?>
+                                                </td>
+                                                <td style="font-size: 14px;">
+                                                    <?php echo $row["order_status"]; ?>
+                                                </td>
+                                               
                                                 <td class="overflow_style2" style="font-size: 14px;">
                                                     <?php echo $row["created_at"]; ?>
                                                 </td>
 
-                                                <td>
+                                                <td class="d-flex p-1">
 
-                                                    <button type="submit" class="btn btn-outline-primary text-danger-hover p-2" onclick="setId(<?php echo $row['id']; ?>,'<?php echo $row['service_name']; ?>')" style="font-size: 14px; margin-left: 10px;">
+
+
+                                                    <button type="submit" class="btn btn-outline-primary text-danger-hover p-2" onclick="setId(<?php echo $row['order_id']; ?>,'<?php echo $row['order_status']; ?>')" style="font-size: 14px; margin-left: 10px;">
                                                         <span style="font-size: 14px;">Edit</span>
                                                     </button>
-                                                </td>
-                                                <td>
-                                                    <!-- Button trigger modal -->
-                                                    <form action="../../backend/user/delete_service.php" onsubmit="return confirm_delete()" method="post">
-                                                        <input type="number" hidden name="service_id" value="<?php echo $row['id']; ?>">
+
+
+                                                    <form action="../../backend/user/delete_order_details.php" onsubmit="return confirm_delete()" method="post">
+                                                        <input type="number" hidden name="service_id" value="<?php echo $row['order_id']; ?>">
                                                         <button type="submit" class="btn btn-outline-danger text-danger-hover p-2" style="font-size: 14px; margin-left: 10px;">
 
                                                             <span style="font-size: 14px;">Delete</span>
                                                         </button>
                                                     </form>
                                                 </td>
-
                                             </tr>
                                     <?php
                                             $sno++;
@@ -295,23 +269,19 @@ include("../../backend/config.php");
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Order Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="../..//backend/user/edit_service.php" method="post" enctype="multipart/form-data">
+                <form action="../..//backend/user/edit_order_details.php" method="post">
                     <div class="modal-body">
                         <div class="mb-2 d-none">
                             <input type="number" name="service_id" class="form-control service_id" hidden readonly required>
                         </div>
 
                         <div class="mb-2">
-                            <input type="text" name="service_name" class="form-control edit service_name" required id="" placeholder="Enter Category Name">
+                            <input type="text" name="service_name" class="form-control edit service_name" required id="" placeholder="Enter Order Details Name">
                         </div>
-                        <div class="mb-2">
-                            <label class="form-label" for="file">Category image</label>
-                            <input type="file" accept=".png,.jpg,.jpeg/*" class="form-control" name="document" id="file">
-                            <p class="text-danger">Only .png,.jpg,.jpeg,type file formate and less than 5 mb file is supportted.</p>
-                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -323,7 +293,7 @@ include("../../backend/config.php");
     </div>
 
 
-    <?php require('./user_components/scripts.php'); ?>
+
 
     <script>
         function confirm_delete() {
@@ -342,6 +312,10 @@ include("../../backend/config.php");
             }
         }
     </script>
+
+
+    <?php require('./user_components/scripts.php'); ?>
+
 
     <script>
         function setId(id, service_name) {

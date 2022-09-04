@@ -77,6 +77,10 @@ include("../../backend/config.php");
                                     class="form-control" id="description" name="description"><?php echo $_POST["description"];?></textarea>
                                 </div>
                                 <div class="mb-3">
+                                    <label for="doc_name" class="form-label">Currency</label>
+                                    <input readonly value="<?php echo $_POST["currency"];?>" type="text" placeholder="Actual Price" required class="form-control" id="name" name="currency">
+                                </div>
+                                <div class="mb-3">
                                     <label for="doc_name" class="form-label">Actual Price</label>
                                     <input readonly value="<?php echo $_POST["actual_price"];?>" type="text" placeholder="Actual Price" required class="form-control" id="name" name="actual_price">
                                 </div>
@@ -113,8 +117,8 @@ include("../../backend/config.php");
                                     <input readonly value="<?php echo $_POST["tag"];?>" type="text" placeholder="Tag" required class="form-control" id="name" name="tag">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="doc_name" class="form-label">Tag</label>
-                                    <input readonly value="<?php echo $_POST["marketing_angle"];?>" type="text" placeholder="Tag" required class="form-control" id="name" name="tag">
+                                    <label for="doc_name" class="form-label">Marketing Angle</label>
+                                    <input readonly value="<?php echo $_POST["marketing_angle"];?>" type="text" placeholder="Marketing Angle" required class="form-control" id="name" name="marketing_angle">
                                 </div>
                                
                                 <!-- <div class="mb-3">

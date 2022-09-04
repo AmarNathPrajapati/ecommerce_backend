@@ -75,7 +75,7 @@ include("../../backend/config.php");
                                     ?>
                                             <option value="<?php echo $row['service_name']; ?>"><?php echo $row['service_name']; ?></option>
                                     <?php
-                                        }
+                                        } 
                                     }
                                     ?>
                                 </select>

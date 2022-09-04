@@ -162,6 +162,7 @@ include("../../backend/config.php");
                                         <th>SNO</th>
                                         <th>Category</th>
                                         <th>Product Name</th>
+                                        <th>Currency</th>
                                         <th>Actual Price</th>
                                         <th>Sale Price</th>
                                         <!-- <th>Cost Price</th>
@@ -179,7 +180,7 @@ include("../../backend/config.php");
                                     <?php
                                     // echo $_GET['document_id12'];
 
-                                    $stmt = "SELECT id,category,title,description,file,file_type,active,created_at,category,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle FROM `product` 
+                                    $stmt = "SELECT id,category,title,description,file,file_type,active,created_at,category,currency,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle FROM `product` 
                                     WHERE deleted_at IS NULL AND active=(?) ORDER BY created_at DESC";
                                     $sql = mysqli_prepare($conn, $stmt);
 
@@ -206,6 +207,11 @@ include("../../backend/config.php");
                                                 <td>
                                                     <?php
                                                     echo $row['title'];
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    echo $row['currency'];
                                                     ?>
                                                 </td>
                                                 <td>
@@ -254,6 +260,7 @@ include("../../backend/config.php");
                                                         <input type="text" name="title" value="<?php echo $row["title"]; ?>" hidden>
                                                         <input type="text" name="old_file_type" value="<?php echo $row["file_type"]; ?>" hidden>
                                                         <input type="text" name="description" value="<?php echo $row["description"]; ?>" hidden>
+                                                        <input type="text" name="currency" value="<?php echo $row["currency"]; ?>" hidden>
                                                         <input type="text" name="actual_price" value="<?php echo $row["actual_price"]; ?>" hidden>
                                                         <input type="text" name="sale_price" value="<?php echo $row["sale_price"]; ?>" hidden>
                                                         <input type="text" name="cost_price" value="<?php echo $row["cost_price"]; ?>" hidden>
@@ -276,6 +283,7 @@ include("../../backend/config.php");
                                                         <input type="text" name="old_file_type" value="<?php echo $row["file_type"]; ?>" hidden>
 
                                                         <input type="text" name="description" value="<?php echo $row["description"]; ?>" hidden>
+                                                        <input type="text" name="currency" value="<?php echo $row["currency"]; ?>" hidden>
                                                         <input type="text" name="actual_price" value="<?php echo $row["actual_price"]; ?>" hidden>
                                                         <input type="text" name="sale_price" value="<?php echo $row["sale_price"]; ?>" hidden>
                                                         <input type="text" name="cost_price" value="<?php echo $row["cost_price"]; ?>" hidden>

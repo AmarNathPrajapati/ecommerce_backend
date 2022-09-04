@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+include('./crm/backend/config.php');
+?>
 
 <head>
     <meta charset="utf-8" />
@@ -62,48 +65,80 @@
     <!-- categories list -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown mx-3">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categories
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                        <div class="mb-3">
+                            <!-- dynamic categories -->
+                            <div class="dropdown">
+                                <a class="btn btn-sm btn-outline-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Product Category
+                                </a>
+
+
+                                <ul class="dropdown-menu">
+                                    <?php
+                                    $stmt = "SELECT id,service_name,file,created_at FROM `services` WHERE services.deleted_at IS NULL ORDER BY created_at DESC";
+                                    $sql = mysqli_prepare($conn, $stmt);
+                                    $result = mysqli_stmt_execute($sql);
+                                    if ($result) {
+                                        $data = mysqli_stmt_get_result($sql);
+                                        while ($row = mysqli_fetch_array($data)) {
+                                    ?>
+                                            <li>
+                                                <a id="<?php echo $row['service_name']; ?>"  class="dropdown-item" href='<?php echo "./category/" . $row['service_name'] . "/index.php"; ?>'>
+                                                    <?php echo $row['service_name']; ?></a>
+                                            </li>
+
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
                     </li>
-                    <li class="nav-item dropdown mx-3">
-                        <img width="100px" src="./91Pka1f3yKS._UX679_.jpg" alt=""> <br>
-                        <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
+                    <?php
+                    $stmt = "SELECT id,service_name,file,created_at FROM `services` WHERE services.deleted_at IS NULL ORDER BY created_at DESC";
+                    $sql = mysqli_prepare($conn, $stmt);
+                    $result = mysqli_stmt_execute($sql);
+                    if ($result) {
+                        $data = mysqli_stmt_get_result($sql);
+                        while ($row = mysqli_fetch_array($data)) {
+                            $category = $row['service_name'];
+                    ?>
+                            <li class="nav-item dropdown mx-3">
+                                <img  width="60px" src="<?php echo './crm/documents/category/' . $row['file'] ?>" alt="">
+                                <a href='<?php echo "./category/" . $row['service_name'] . "/index.php"; ?>' class="text-decoration-none text-black d-block"><?php
+                                    echo $category;
+                                ?></a>
+                                <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <?php
+                                    $stmt1 = "SELECT id,title FROM `product` WHERE product.deleted_at IS NULL AND category = (?) ORDER BY created_at DESC";
+                                    $sql1 = mysqli_prepare($conn, $stmt1);
+                                    mysqli_stmt_bind_param($sql1, 's', $category);
+                                    $result1 = mysqli_stmt_execute($sql1);
+                                    if ($result1) {
+                                        $data1 = mysqli_stmt_get_result($sql1);
+                                        while ($row1 = mysqli_fetch_array($data1)) {
+                                    ?>
+                                            <li><a class="dropdown-item" href="#"><?php echo $row1['title']; ?></a></li>
+
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+
+                                </ul>
                             </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown mx-3">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categories
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+                    <?php
+                        }
+                    }
+                    ?>
+
                 </ul>
             </div>
         </div>

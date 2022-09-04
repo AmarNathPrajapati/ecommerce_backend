@@ -12,7 +12,7 @@ include("../../backend/config.php");
 
 <head>
     <?php require('./user_components/header_links.php'); ?>
-    <title>Manage Currency</title>
+    <title>Manage Order Status</title>
 
     <style>
         .tags {
@@ -108,15 +108,13 @@ include("../../backend/config.php");
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New Currency</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">New Order Status</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="../..//backend/user/new_currency.php" method="post">
+                    <form action="../..//backend/user/new_order_status.php" method="post">
                             <div class="modal-body">
-                                <label for="cname">Currency Name</label>
-                                <input id="cname" type="text" name="service_name" class="form-control " required placeholder="Enter Currency Name">
-                                <label for="csymbol">Currency Symbol</label>
-                                <input id="csymbol" type="text" name="currency_symbol" class="form-control " required placeholder="Enter Currency Symbol">
+                                <label for="cname">Add Order Status</label>
+                                <input id="cname" type="text" name="service_name" class="form-control " required placeholder="Enter Order Status Name">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -135,7 +133,7 @@ include("../../backend/config.php");
                         <div class="row align-items-center">
                             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                 <!-- Title -->
-                                <h1 class="h2 mb-0 ls-tight">Currency</h1>
+                                <h1 class="h2 mb-0 ls-tight">Order Status</h1>
                             </div>
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
@@ -144,7 +142,7 @@ include("../../backend/config.php");
                                         <span class=" pe-2">
                                             <i class="bi bi-plus"></i>
                                         </span>
-                                        <span>Add Currency</span>
+                                        <span>Add Order Status</span>
                                     </a>
                                 </div>
                             </div>
@@ -166,10 +164,10 @@ include("../../backend/config.php");
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total Currrency</span>
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total Order Status</span>
                                             <?php
                         
-                                                    $stmt="SELECT count(id) FROM `currency` WHERE deleted_at IS NULL";
+                                                    $stmt="SELECT count(id) FROM `order_status` WHERE deleted_at IS NULL";
                                                     $sql=mysqli_prepare($conn, $stmt);
 
                                                     // $is_admin=2;
@@ -202,7 +200,7 @@ include("../../backend/config.php");
 
                     <div class="card shadow border-0 mb-7">
                         <div class="card-header">
-                            <h5 class="mb-0">Currencies</h5>
+                            <h5 class="mb-0">Order Statuses</h5>
                         </div>
                         <div class="table-responsive" style="padding: 30px 18px;">
                             <table class="table table-hover table-nowrap" id="myTable"
@@ -211,9 +209,8 @@ include("../../backend/config.php");
                                     <tr>
                                         <th style="font-size: 16px;">Sno</th>
                                         <th style="font-size: 16px;">
-                                        Currency Name</th>
-                                        <th style="font-size: 16px;">
-                                        Currency Symbol</th>
+                                        Status Name</th>
+                                        
                                         <th style="font-size: 16px;">Created At</th>
                                         <th style="font-size: 16px;">Action</th>
                                     </tr>
@@ -221,7 +218,7 @@ include("../../backend/config.php");
                                 <tbody style="border: 0px solid black !important;">
                                     <?php
                                    
-                                        $stmt="SELECT id,service_name,currency_symbol,created_at FROM `currency` WHERE currency.deleted_at IS NULL ORDER BY created_at DESC";
+                                        $stmt="SELECT id,order_status,created_at FROM `order_status` WHERE order_status.deleted_at IS NULL ORDER BY created_at DESC";
                                         $sql=mysqli_prepare($conn, $stmt);
 
                                         // mysqli_stmt_bind_param($sql,'i',$is_admin);
@@ -239,11 +236,9 @@ include("../../backend/config.php");
                                         </td>
 
                                         <td style="font-size: 14px;">
-                                            <?php echo $row["service_name"];?>
+                                            <?php echo $row["order_status"];?>
                                         </td>
-                                        <td style="font-size: 14px;">
-                                            <?php echo $row["currency_symbol"];?>
-                                        </td>
+                                        
                                       
                                         <td class="overflow_style2" style="font-size: 14px;">
                                             <?php echo $row["created_at"];?>
@@ -254,12 +249,12 @@ include("../../backend/config.php");
                                            
                                                 
                                             <button type="submit" class="btn btn-outline-primary text-danger-hover p-2" 
-                                            onclick="setId(<?php echo $row['id'];?>,'<?php echo $row['service_name'];?>')" style="font-size: 14px; margin-left: 10px;">
+                                            onclick="setId(<?php echo $row['id'];?>,'<?php echo $row['order_status'];?>')" style="font-size: 14px; margin-left: 10px;">
                                                 <span style="font-size: 14px;">Edit</span>
                                             </button>
                                            
 
-                                            <form action="../../backend/user/delete_currency.php" onsubmit="return confirm_delete()" method="post">
+                                            <form action="../../backend/user/delete_order_status.php" onsubmit="return confirm_delete()" method="post">
                                                 <input type="number" hidden name="service_id"
                                                     value="<?php echo $row['id'];?>">
                                                 <button type="submit" class="btn btn-outline-danger text-danger-hover p-2"
@@ -288,7 +283,7 @@ include("../../backend/config.php");
 
                     </div>
                 </div>
-            </main> 
+            </main>
         </div>
     </div>
 
@@ -296,21 +291,19 @@ include("../../backend/config.php");
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Currency</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Order Status</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="../..//backend/user/edit_currency.php" method="post">
+                <form action="../..//backend/user/edit_order_status.php" method="post">
                         <div class="modal-body">
                             <div class="mb-2 d-none">
                                 <input type="number" name="service_id" class="form-control service_id" hidden readonly  required  >
                             </div>
 
                             <div class="mb-2">
-                                <input type="text" name="service_name" class="form-control edit service_name" required id="" placeholder="Enter Currency Name">
+                                <input type="text" name="service_name" class="form-control edit service_name" required id="" placeholder="Enter Order Status Name">
                             </div>
-                            <div class="mb-2">
-                                <input type="text" name="currency_symbol" class="form-control edit service_name" required id="" placeholder="Enter Currency Symbol">
-                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -347,7 +340,7 @@ include("../../backend/config.php");
     <?php require('./user_components/scripts.php');?>
 
 
-    <script>
+    <script> 
         function setId(id,service_name){
 
             if (id=="" || id==null || service_name=="" || service_name==null) {

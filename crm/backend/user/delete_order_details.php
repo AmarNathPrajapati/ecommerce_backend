@@ -1,20 +1,18 @@
 <?php
-if (!empty($_POST["service_id"]) && !empty($_POST["service_name"])) {
+if (!empty($_POST["service_id"])) {
     include('../config.php');
    
     $from_location=$_SERVER['HTTP_REFERER'];
-    $stmt="UPDATE `currency` SET service_name=?, currency_symbol = ? WHERE id=(?)";
+    $stmt="UPDATE `order_details` SET `deleted_at` = ?  WHERE order_id=(?)";
     $sql=mysqli_prepare($conn, $stmt);
 
     $id=test_input($_POST["service_id"]);
-    $service_name=test_input($_POST["service_name"]);
-    $currency_symbol=test_input($_POST["currency_symbol"]);
-
-    //binding the parameters to prepard statement
-    mysqli_stmt_bind_param($sql,"ssi",$service_name,$currency_symbol,$id);
+    $timestamp=date("Y-m-d H:i:s");
+    //binding the parameters to prepard statement 
+    mysqli_stmt_bind_param($sql,"si",$timestamp,$id);
 
     $result=mysqli_stmt_execute($sql);
-    if ($result) { 
+    if ($result) {
         
 
             mysqli_stmt_close($sql);
@@ -22,11 +20,8 @@ if (!empty($_POST["service_id"]) && !empty($_POST["service_name"])) {
             ?>
              <script>
                     window.location.href="<?php echo $from_location; ?>"
-                    
             </script>
             <?php
-        
-
     }
     else{
 
@@ -40,16 +35,14 @@ if (!empty($_POST["service_id"]) && !empty($_POST["service_name"])) {
         
     }
                 
-                
-            
 } else {
-    
     ?>
+
     <script>alert('Please fill all mandatory fields.');
        history.back();
     </script>
+    
     <?php
-
 }
 
 function test_input($data) {

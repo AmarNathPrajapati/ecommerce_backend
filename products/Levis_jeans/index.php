@@ -9,15 +9,15 @@
     <?php
     include("../components/header_links.php")
     ?>
-    <title>iphone</title>
+    <title>Levis jeans</title>
 </head>
 
 <body>
     <!-- Navbar -->
     <div class="container">
-        <h1 id="post-title" class="text-center my-5">iphone</h1>
-        <img src="../../crm/documents/products/download (1)6310a6dd436462.23442719.jpg" style="max-width:100%; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
-        <p  class="mt-4" style="font-size:20px;text-align:"justify";">best iphone</p>
+        <h1 id="post-title" class="text-center my-5">Levis jeans</h1>
+        <img src="../../crm/documents/products/mens-branded-heavy-knitted-jeans-thumb6312b996446a85.07504376.jpg" style="max-width:100%; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
+        <p  class="mt-4" style="font-size:20px;text-align:"justify";">best jeans</p>
         
     </div>
     <!-- Footer -->

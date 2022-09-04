@@ -1,32 +1,4 @@
-<?php
-include('../config.php');
 
-if (!empty($_POST['service_name'])) {
-    $service_name = test_input($_POST["service_name"]);
-    $title = test_input($_POST["service_name"]);
-    $description = test_input($_POST["service_name"]);
-    $from_location = $_SERVER['HTTP_REFERER'];
-    $fileName = $_FILES['document']['name'];
-    $fileTmpName = $_FILES['document']['tmp_name'];
-    $fileSize = $_FILES['document']['size'];
-    $fileError = $_FILES['document']['error'];
-    $fileType = $_FILES['document']['type'];
-    $fileExt = explode('.', $fileName);
-    $fileActualExt = strtolower(end($fileExt));
-    $allowed = array('jpg', 'png', 'jpeg', 'docs', 'docx', "mp4");
-    $fileNameNew = $fileExt[0] . uniqid('', true) . "." . $fileActualExt;
-
-    if (in_array($fileActualExt, $allowed)) {
-        if ($fileError == 0) {
-            if ($fileSize <= 6000000) {
-                $structure = '../../documents/category';
-                $fileDestination = $structure . "/" . $fileNameNew;
-                move_uploaded_file($fileTmpName, $fileDestination);
-
-                
-                //creating dynamic folder and file        
-                $folder_name = str_replace(' ', '_', $title);
-                $content = '
                 <!DOCTYPE html>
                 <html lang="en">
                 <?php
@@ -178,7 +150,7 @@ if (!empty($_POST['service_name'])) {
                                 <?php
                                 // echo $_GET["document_id12"];
                                 // change no. 01
-                                $category ="'.$_POST["service_name"].'";
+                                $category ="Electronics";
                                 $stmt = "SELECT id,category,title,description,file,file_type,active,created_at,category,currency,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle FROM `product` 
                                                     WHERE deleted_at IS NULL AND active=(?) AND category =(?) ORDER BY created_at DESC";
                                 $sql = mysqli_prepare($conn, $stmt);
@@ -239,6 +211,7 @@ if (!empty($_POST['service_name'])) {
                                                     <input type="text" name="tag" value="<?php echo $row["tag"]; ?>" hidden>
                                                     <input type="text" name="marketing_angle" value="<?php echo $row["marketing_angle"]; ?>" hidden>
                 
+                                                   
                                                 </form>
                                                 <button class="btn btn-sm btn-outline-primary h-50 my-2">
                                                     Add to Cart
@@ -268,78 +241,4 @@ if (!empty($_POST['service_name'])) {
                     <script src="js/scripts.js"></script>
                 </body>
                 
-                </html>';
-
-                $dir = "../../../category/" . $folder_name;
-                if (!is_dir($dir)) {
-                    mkdir($dir, 0777, true);
-                }
-                $fp = fopen($dir . "/index.php", "wb");
-                fwrite($fp, $content);
-                fclose($fp);
-                $php_file_location = "category/" . $folder_name . "/index.php";
-
-
-                //insertion in database
-                $stmt = "INSERT INTO `services` (service_name,file,file_type) VALUES (?,?,?)";
-                $sql = mysqli_prepare($conn, $stmt);
-                mysqli_stmt_bind_param($sql, 'sss', $service_name, $fileNameNew, $fileActualExt);
-                $result = mysqli_stmt_execute($sql);
-                if ($result) {
-                    mysqli_stmt_close($sql);
-                    echo '
-                    <script>
-                    alert("Successfully!! Uploaded the file.");
-                    history.back();
-                    </script>
-                    ';
-?>
-                <?php } else {
-                    mysqli_stmt_close($sql);
-                ?>
-                    <script>
-                        alert('Sorry Something Went Wrong. Please try again.');
-                        history.back();
-                    </script>
-    <?php
-                }
-            } else {
-                // error is due to larger file
-                $fileSizeInMb = $fileSize / 1000;
-
-                echo '<script>
-                  alert("Your file size is' . $fileSizeInMb . 'kb. Only less than 6MB files are supported.");
-                  history.back();
-                 </script>';
-            }
-        } else {
-            echo mysqli_error($conn);
-
-            echo '<script>
-            alert("Something went wrong. We are facing some technical issue. It will be resolved soon. "' . mysqli_error($conn) . ')
-                history.back();
-            <script>';
-        }
-    }
-} else {
-    ?>
-    <script>
-        alert("Please fill all the mandatory fields.");
-        history.back();
-    </script>
-<?php
-}
-
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    $data = ucwords($data);
-
-    if ($data == "" || $data == null) {
-        $data = "Not Available";
-    }
-    return $data;
-}
-?>
+                </html>

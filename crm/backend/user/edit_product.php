@@ -10,6 +10,7 @@ if (!empty($_POST["title"]) && !empty($_POST["description"]) && !empty($_POST["i
         $id=$_POST["id"];
         $file_old=$_POST["file_old"];
         $category=($_POST['post_category']);
+        $currency=$_POST["currency"];
         $actual_price=$_POST["actual_price"];
         $sale_price=$_POST["sale_price"];
         $cost_price=$_POST["cost_price"];
@@ -94,7 +95,7 @@ if (!empty($_POST["title"]) && !empty($_POST["description"]) && !empty($_POST["i
                             move_uploaded_file($fileTmpName, $fileDestination);
                             unlink('../../documents/products/'.$_POST["old_file"]);
 
-                            $stmt="UPDATE `product` SET category = ?, title=?,description=?,actual_price=?,sale_price=?,cost_price=?,sku_number=?,quantity=?,weight=?,tag=?,marketing_angle=?,file=?,file_type=?,php_file_location=?,active=? WHERE id=(?)";
+                            $stmt="UPDATE `product` SET category = ?, title=?,description=?,currency=?,actual_price=?,sale_price=?,cost_price=?,sku_number=?,quantity=?,weight=?,tag=?,marketing_angle=?,file=?,file_type=?,php_file_location=?,active=? WHERE id=(?)";
                             $sql=mysqli_prepare($conn, $stmt);
                         
                             //binding the parameters to prepard statement
@@ -105,11 +106,11 @@ if (!empty($_POST["title"]) && !empty($_POST["description"]) && !empty($_POST["i
                                 $description="Not Available";
                             }
                             
-                            mysqli_stmt_bind_param($sql,"ssssssssssssssii",$category,$title,$description,$actual_price,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active,$id);
+                            mysqli_stmt_bind_param($sql,"sssssssssssssssii",$category,$title,$description,$currency,$actual_price,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active,$id);
                             $result=mysqli_stmt_execute($sql);
                         
                             if ($result) {
-                              
+                            
                                 echo '<script>
                             
                             window.location.href="'.$redirect_to.'";
@@ -130,7 +131,7 @@ if (!empty($_POST["title"]) && !empty($_POST["description"]) && !empty($_POST["i
 
                             move_uploaded_file($fileTmpName, $fileDestination);
                             unlink('../../documents/products/'.$_POST["old_file"]);
-                            $stmt="UPDATE `product` SET category = ?, title=?,description=?,actual_price=?,sale_price=?,cost_price=?,sku_number=?,quantity=?,weight=?,tag=?,marketing_angle=?,file=?,file_type=?,php_file_location=?,active=? WHERE id=(?)";
+                            $stmt="UPDATE `product` SET category = ?, title=?,description=?,currency=?,actual_price=?,sale_price=?,cost_price=?,sku_number=?,quantity=?,weight=?,tag=?,marketing_angle=?,file=?,file_type=?,php_file_location=?,active=? WHERE id=(?)";
                             $sql=mysqli_prepare($conn, $stmt);
                         
                             //binding the parameters to prepard statement
@@ -141,7 +142,7 @@ if (!empty($_POST["title"]) && !empty($_POST["description"]) && !empty($_POST["i
                                 $description="Not Available";
                             }
                             
-                            mysqli_stmt_bind_param($sql,"ssssssssssssssii",$category,$title,$description,$actual_price,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active,$id);
+                            mysqli_stmt_bind_param($sql,"sssssssssssssssii",$category,$title,$description,$currency,$actual_price,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active,$id);
                             $result=mysqli_stmt_execute($sql);
                         
                             if ($result) {
@@ -198,7 +199,7 @@ else{
     $id=$_POST["id"];
     $active=$_POST["active"];
     
-    $stmt="UPDATE `product` SET category = ?, title=?,description=?,actual_price=?,sale_price=?,cost_price=?,sku_number=?,quantity=?,weight=?,tag=?,marketing_angle=?,file=?,file_type=?,php_file_location=?,active=? WHERE id=(?)";
+    $stmt="UPDATE `product` SET category = ?, title=?,description=?,currency=?,actual_price=?,sale_price=?,cost_price=?,sku_number=?,quantity=?,weight=?,tag=?,marketing_angle=?,file=?,file_type=?,php_file_location=?,active=? WHERE id=(?)";
     $sql=mysqli_prepare($conn, $stmt);
 
 
@@ -262,7 +263,7 @@ else{
     fclose($fp);
     $php_file_location="products/".$folder_name."/index.php";
     
-    mysqli_stmt_bind_param($sql,"ssssssssssssssii",$category,$title,$description,$actual_price,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active,$id);
+    mysqli_stmt_bind_param($sql,"sssssssssssssssii",$category,$title,$description,$actual_price,$currency,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active,$id);
     $result=mysqli_stmt_execute($sql);
 
     if ($result) {

@@ -8,7 +8,7 @@ if (!empty($_POST["service_id"])) {
 
     $id=test_input($_POST["service_id"]);
     $timestamp=date("Y-m-d H:i:s");
-    //binding the parameters to prepard statement
+    //binding the parameters to prepard statement 
     mysqli_stmt_bind_param($sql,"si",$timestamp,$id);
 
     $result=mysqli_stmt_execute($sql);

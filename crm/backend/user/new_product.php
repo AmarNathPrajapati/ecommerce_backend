@@ -8,6 +8,7 @@ if (!empty($_POST['post_title']) && !empty($_POST['post_category']) && !empty($_
         $title=test_input($_POST['post_title']);
         $category=test_input($_POST['post_category']);
         $description=test_input($_POST["post_description"]);
+        $currency=$_POST["currency"];
         $actual_price=$_POST["actual_price"];
         $sale_price=$_POST["sale_price"];
         $cost_price=$_POST["cost_price"];
@@ -18,7 +19,7 @@ if (!empty($_POST['post_title']) && !empty($_POST['post_category']) && !empty($_
         $marketing_angle=$_POST["marketing_angle"];
         $active=$_POST["active"];
         $fileName=$_FILES['document']['name'];  
-        $fileTmpName=$_FILES['document']['tmp_name'];
+        $fileTmpName=$_FILES['document']['tmp_name']; 
         $fileSize=$_FILES['document']['size'];
         $fileError=$_FILES['document']['error']; 
         $fileType=$_FILES['document']['type'];
@@ -87,10 +88,10 @@ if (!empty($_POST['post_title']) && !empty($_POST['post_category']) && !empty($_
                         $fileDestination=$structure."/".$fileNameNew;
                         move_uploaded_file($fileTmpName, $fileDestination);
 
-                        $stmt="INSERT INTO `product` (category,title,description,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle,file,file_type,php_file_location,active) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        $stmt="INSERT INTO `product` (category,title,description,currency,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle,file,file_type,php_file_location,active) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                         $sql=mysqli_prepare($conn, $stmt);
                         //binding the parameters to prepard statement
-                        mysqli_stmt_bind_param($sql,"ssssssssssssssi",$category,$title,$description,$actual_price,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active);
+                        mysqli_stmt_bind_param($sql,"sssssssssssssssi",$category,$title,$description,$currency,$actual_price,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active);
                         $result=mysqli_stmt_execute($sql);
                     
                         if ($result) {
@@ -113,7 +114,7 @@ if (!empty($_POST['post_title']) && !empty($_POST['post_category']) && !empty($_
                         $fileDestination=$structure."/".$fileNameNew;
 
                         move_uploaded_file($fileTmpName, $fileDestination);
-                        $stmt="INSERT INTO `product` (category,title,description,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle,file,file_type,php_file_location,active) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        $stmt="INSERT INTO `product` (category,title,description,currency,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle,file,file_type,php_file_location,active) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                         $sql=mysqli_prepare($conn, $stmt);
                     
                         //binding the parameters to prepard statement
@@ -124,7 +125,7 @@ if (!empty($_POST['post_title']) && !empty($_POST['post_category']) && !empty($_
                             $description="Not Available";
                         }
                         
-                        mysqli_stmt_bind_param($sql,"ssssssssssssssi",$category,$title,$description,$actual_price,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active);
+                        mysqli_stmt_bind_param($sql,"sssssssssssssssi",$category,$title,$description,$currency,$actual_price,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active);
                         $result=mysqli_stmt_execute($sql);
                     
                         if ($result) {
@@ -214,7 +215,7 @@ else if(!empty($_POST['post_title'])){
                     fclose($fp);
                     $php_file_location="products/".$folder_name."/index.php";
 
-                    $stmt="INSERT INTO `product` (category,title,description,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle,file,file_type,php_file_location,active) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    $stmt="INSERT INTO `product` (category,title,description,currency,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle,file,file_type,php_file_location,active) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                     $sql=mysqli_prepare($conn, $stmt);
                 
                     //binding the parameters to prepard statement
@@ -225,7 +226,7 @@ else if(!empty($_POST['post_title'])){
                         $description="Not Available";
                     }
                     
-                    mysqli_stmt_bind_param($sql,"ssssssssssssssi",$category,$title,$description,$actual_price,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active);
+                    mysqli_stmt_bind_param($sql,"sssssssssssssssi",$category,$title,$description,$currency,$actual_price,$sale_price,$cost_price,$sku_number,$quantity,$weight,$tag,$marketing_angle,$fileNameNew,$fileActualExt,$php_file_location,$active);
                     $result=mysqli_stmt_execute($sql);
                 
                     if ($result) {
