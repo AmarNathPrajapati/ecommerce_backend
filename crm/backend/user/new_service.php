@@ -23,7 +23,7 @@ if (!empty($_POST['service_name'])) {
                 $fileDestination = $structure . "/" . $fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDestination);
 
-                
+
                 //creating dynamic folder and file        
                 $folder_name = str_replace(' ', '_', $title);
                 $content = '
@@ -181,7 +181,7 @@ include("../../crm/backend/config.php");
                 <?php
                 // echo $_GET["document_id12"];
                 // change no. 01
-                $category = "'.$_POST["service_name"].'";
+                $category = "' . $_POST["service_name"] . '";
                 $stmt = "SELECT id,category,title,description,file,file_type,active,created_at,category,currency,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle FROM `product` 
                                     WHERE deleted_at IS NULL AND active=(?) AND category =(?) ORDER BY created_at DESC";
                 $sql = mysqli_prepare($conn, $stmt);

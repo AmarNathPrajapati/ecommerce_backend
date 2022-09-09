@@ -9,7 +9,7 @@ if (!empty($_POST['category']) && !empty($_POST['currency']) && !empty($_POST['f
     $pin_value = ($_POST["pin_value"]);
     $range_km = ($_POST["range_km"]);
     $range_value = ($_POST["range_value"]);
-    $from_location = "../../frontend/user/shipping_category.php";
+    $from_location = "../../frontend/user/shipping_product.php";
     if (count($pincode) >= count($range_km)) {
         foreach ($pincode as $index => $names) {
             // echo $names."_".$phone[$index];
@@ -24,7 +24,7 @@ if (!empty($_POST['category']) && !empty($_POST['currency']) && !empty($_POST['f
                 $s_range_value = 0;
             }
 
-            $stmt = "INSERT INTO `shipping_category` (category,currency,fixed_value,pincode,pin_value,range_km,range_value) VALUES (?,?,?,?,?,?,?)";
+            $stmt = "INSERT INTO `shipping_product` (category,currency,fixed_value,pincode,pin_value,range_km,range_value) VALUES (?,?,?,?,?,?,?)";
             $sql = mysqli_prepare($conn, $stmt);
             mysqli_stmt_bind_param($sql, 'sssssss', $category, $currency, $fixed_value, $s_pincode, $s_pinvalue, $s_range_km, $s_range_value);
             $result = mysqli_stmt_execute($sql);
@@ -60,7 +60,7 @@ if (!empty($_POST['category']) && !empty($_POST['currency']) && !empty($_POST['f
                 $s_pinvalue = 0;
             }
 
-            $stmt = "INSERT INTO `shipping_category` (category,currency,fixed_value,pincode,pin_value,range_km,range_value) VALUES (?,?,?,?,?,?,?)";
+            $stmt = "INSERT INTO `shipping_product` (category,currency,fixed_value,pincode,pin_value,range_km,range_value) VALUES (?,?,?,?,?,?,?)";
             $sql = mysqli_prepare($conn, $stmt);
             mysqli_stmt_bind_param($sql, 'sssssss', $category, $currency, $fixed_value, $s_pincode, $s_pinvalue, $s_range_km, $s_range_value);
             $result = mysqli_stmt_execute($sql);
@@ -78,7 +78,7 @@ if (!empty($_POST['category']) && !empty($_POST['currency']) && !empty($_POST['f
         ?>
             <script>
                 alert('Sorry Something Went Wrong. Please try again.');
-                // history.back();
+                history.back();
             </script>
     <?php
         }
@@ -87,7 +87,7 @@ if (!empty($_POST['category']) && !empty($_POST['currency']) && !empty($_POST['f
     ?>
     <script>
         alert("Please fill all the mandatory fields.");
-        // history.back();
+        history.back();
     </script>
 <?php
 }

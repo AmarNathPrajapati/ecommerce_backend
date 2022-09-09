@@ -135,8 +135,8 @@ include("../../backend/config.php");
                                     <input type="text" placeholder="Qunatity" class="form-control" id="name" name="quantity">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="doc_name" class="form-label">Select weight in</label>
-                                    <select  name="" id="">
+                                    <label for="doc_name" class="form-label">Select weight Unit</label>
+                                    <select  name="weight_unit" id="">
                                         <option value="Kg">Kg</option>
                                         <option value="gram">gram</option>
                                         <option value="mg">mg</option>

@@ -254,7 +254,7 @@ include("../../backend/config.php");
                                            
                                                 
                                             <button type="submit" class="btn btn-outline-primary text-danger-hover p-2" 
-                                            onclick="setId(<?php echo $row['id'];?>,'<?php echo $row['service_name'];?>')" style="font-size: 14px; margin-left: 10px;">
+                                            onclick="setId(<?php echo $row['id'];?>,'<?php echo $row['service_name'];?>','<?php echo $row['currency_symbol'];?>')" style="font-size: 14px; margin-left: 10px;">
                                                 <span style="font-size: 14px;">Edit</span>
                                             </button>
                                            
@@ -309,7 +309,7 @@ include("../../backend/config.php");
                                 <input type="text" name="service_name" class="form-control edit service_name" required id="" placeholder="Enter Currency Name">
                             </div>
                             <div class="mb-2">
-                                <input type="text" name="currency_symbol" class="form-control edit service_name" required id="" placeholder="Enter Currency Symbol">
+                                <input type="text" name="currency_symbol" class="form-control edit currency_symbol" required id="" placeholder="Enter Currency Symbol">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -348,7 +348,7 @@ include("../../backend/config.php");
 
 
     <script>
-        function setId(id,service_name){
+        function setId(id,service_name,currency_symbol){
 
             if (id=="" || id==null || service_name=="" || service_name==null) {
                 alert("Something went wrong");
@@ -357,6 +357,7 @@ include("../../backend/config.php");
 
             document.getElementsByClassName('service_id')[0].value=id;
             document.getElementsByClassName('edit service_name')[0].value=service_name;
+            document.getElementsByClassName('edit currency_symbol')[0].value=currency_symbol;
             $('#editModal').modal('show');
 
 

@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+
+                <!DOCTYPE html>
 <html lang="en">
 <?php
-include('../../crm/backend/config.php');
+include("../../crm/backend/config.php");
 ?>
 
 <head>
@@ -25,7 +26,7 @@ include('../../crm/backend/config.php');
             <a class="navbar-brand" href="#!">Hello
                 <?php
                 session_start();
-                echo $_SESSION['username'];
+                echo $_SESSION["username"];
                 ?>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -87,8 +88,8 @@ include('../../crm/backend/config.php');
                                         while ($row = mysqli_fetch_array($data)) {
                                     ?>
                                             <li>
-                                                <a class="dropdown-item" href='<?php echo "/ecommerce/category/" . $row['service_name'] . "/index.php"; ?>'>
-                                                    <?php echo $row['service_name']; ?></a>
+                                                <a class="dropdown-item" href="<?php echo "/ecommerce/category/" . $row["service_name"] . "/index.php"; ?>">
+                                                    <?php echo $row["service_name"]; ?></a>
                                             </li>
 
                                     <?php
@@ -106,11 +107,11 @@ include('../../crm/backend/config.php');
                     if ($result) {
                         $data = mysqli_stmt_get_result($sql);
                         while ($row = mysqli_fetch_array($data)) {
-                            $category = $row['service_name'];
+                            $category = $row["service_name"];
                     ?>
                             <li class="nav-item dropdown mx-3">
-                                <img width="60px" src="<?php echo '../../crm/documents/category/' . $row['file'] ?>" alt="">
-                                <a href='<?php echo "/ecommerce/category/" . $row['service_name'] . "/index.php"; ?>' class="text-decoration-none text-black d-block"><?php
+                                <img width="60px" src="<?php echo "../../crm/documents/category/" . $row["file"] ?>" alt="">
+                                <a href="<?php echo "/ecommerce/category/" . $row["service_name"] . "/index.php"; ?>" class="text-decoration-none text-black d-block"><?php
                                                                                                                                                                 echo $category;
                                                                                                                                                                 ?></a>
                                 <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -119,13 +120,13 @@ include('../../crm/backend/config.php');
                                     <?php
                                     $stmt1 = "SELECT id,title FROM `product` WHERE product.deleted_at IS NULL AND category = (?) ORDER BY created_at DESC";
                                     $sql1 = mysqli_prepare($conn, $stmt1);
-                                    mysqli_stmt_bind_param($sql1, 's', $category);
+                                    mysqli_stmt_bind_param($sql1, "s", $category);
                                     $result1 = mysqli_stmt_execute($sql1);
                                     if ($result1) {
                                         $data1 = mysqli_stmt_get_result($sql1);
                                         while ($row1 = mysqli_fetch_array($data1)) {
                                     ?>
-                                            <li><a class="dropdown-item" href="#"><?php echo $row1['title']; ?></a></li>
+                                            <li><a class="dropdown-item" href="#"><?php echo $row1["title"]; ?></a></li>
 
                                     <?php
                                         }
@@ -150,14 +151,14 @@ include('../../crm/backend/config.php');
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php
-                // echo $_GET['document_id12'];
+                // echo $_GET["document_id12"];
                 // change no. 01
                 $category = "Mobiles";
                 $stmt = "SELECT id,category,title,description,file,file_type,active,created_at,category,currency,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle FROM `product` 
                                     WHERE deleted_at IS NULL AND active=(?) AND category =(?) ORDER BY created_at DESC";
                 $sql = mysqli_prepare($conn, $stmt);
 
-                mysqli_stmt_bind_param($sql, 'is', $active, $category);
+                mysqli_stmt_bind_param($sql, "is", $active, $category);
                 $active = 1;
                 $result = mysqli_stmt_execute($sql);
 
@@ -169,25 +170,25 @@ include('../../crm/backend/config.php');
                         <div class="col mb-5">
                             <div class="card h-100">
                                 <!-- Product image-->
-                                <img class="card-img-top" src='<?php echo "../../crm/documents/products/" . $row['file']; ?>' alt="..." />
+                                <img class="card-img-top" src="<?php echo "../../crm/documents/products/" . $row["file"]; ?>" alt="..." />
                                 <!-- Product details-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <!-- Product name-->
                                         <h5 class="fw-bolder">
                                             <?php
-                                            echo $row['title'];
+                                            echo $row["title"];
                                             ?>
                                         </h5>
                                         <!-- Product price-->
                                         <p style="text-decoration: line-through;">
                                             <?php
-                                            echo $row['actual_price'] . " " . $row['currency'];
+                                            echo $row["actual_price"] . " " . $row["currency"];
                                             ?>
                                         </p>
                                         <p>
                                             <?php
-                                            echo $row['sale_price'] . " " . $row['currency'];
+                                            echo $row["sale_price"] . " " . $row["currency"];
                                             ?>
                                         </p>
                                     </div>
@@ -216,9 +217,14 @@ include('../../crm/backend/config.php');
 
                                 </form>
 
-                                <label for="quantity">Total Availability</label>
-
-                                <input value="<?php echo $row["quantity"]; ?>" type="text">
+                               
+                                <input readonly value="<?php
+                                if($row["quantity"]<5){
+                                    echo "only ".$row["quantity"]." in stock"; 
+                                }else{
+                                    echo "In stock"; 
+                                }
+                                ?>" type="text">
 
                                 <button class="btn btn-sm btn-outline-primary h-50 my-2">
                                     Add to Cart
@@ -239,10 +245,10 @@ include('../../crm/backend/config.php');
                             <input type="text" name="order_status" value="Placed" hidden>
 
                             <?php
-                            $username = $_SESSION['username'];
+                            $username = $_SESSION["username"];
                             $stmt = "SELECT id,name FROM `customers` WHERE customers.deleted_at is Null and name=
-                                    '$username';
-                                    ";
+                                    '$username'";
+                                    ;
                             $sql = mysqli_prepare($conn, $stmt);
                             $result = mysqli_stmt_execute($sql);
                             if ($result) {

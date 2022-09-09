@@ -3,13 +3,13 @@ include('../config.php');
 
 
 
-if (!empty($_POST['name'])&& !empty($_POST['password'])) {
-    $name = test_input($_POST["name"]);
+if (!empty($_POST['email'])&& !empty($_POST['password'])) {
+    $email = test_input($_POST["email"]);
     $password = test_input($_POST["password"]);
 
-    $stmt = "SELECT name,password FROM customers where name=(?)";
+    $stmt = "SELECT name,email,password FROM customers where email=(?)";
     $sql = mysqli_prepare($conn, $stmt);
-    mysqli_stmt_bind_param($sql, "s", $name);
+    mysqli_stmt_bind_param($sql, "s", $email);
     $result = mysqli_stmt_execute($sql);
 
     if ($result) {
@@ -19,7 +19,7 @@ if (!empty($_POST['name'])&& !empty($_POST['password'])) {
         if (password_verify($password, $row['password'])) {
             session_start();
             $_SESSION['loggedin'] = true;
-            $_SESSION['username'] = $name;
+            $_SESSION['username'] = $row['name'];
 ?>
             <script src="sweetalert.min.js"></script>
 
@@ -41,7 +41,7 @@ if (!empty($_POST['name'])&& !empty($_POST['password'])) {
                 <script>
                     swal("Invalid Credentials", "Please Try Again!", "error");
                     setTimeout(() => {
-                        history.back();
+                        // history.back();
                     }, 3000);
                 </script>
             </body>
@@ -57,7 +57,7 @@ if (!empty($_POST['name'])&& !empty($_POST['password'])) {
             <script>
                 swal("Invalid Credentials", "Please Try Again!", "error");
                 setTimeout(() => {
-                    history.back();
+                    // history.back();
                 }, 3000);
             </script>
         </body>
@@ -71,7 +71,7 @@ if (!empty($_POST['name'])&& !empty($_POST['password'])) {
         <script>
             swal("Please fill all the mandatory fields.", "Please Try Again!", "warning");
             setTimeout(() => {
-                history.back();
+                // history.back();
             }, 3000);
         </script>
     </body>

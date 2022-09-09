@@ -108,6 +108,10 @@ include("../../backend/config.php");
                                     <input readonly value="<?php echo $_POST["quantity"];?>" type="text" placeholder="Qunatity" required class="form-control" id="name" name="quantity">
                                 </div>
                                 <div class="mb-3">
+                                    <label for="doc_name" class="form-label">Weight unit</label>
+                                    <input readonly value="<?php echo $_POST["weight_unit"];?>" type="text" placeholder="Weight" required class="form-control" id="name" name="weight">
+                                </div>
+                                <div class="mb-3">
                                     <label for="doc_name" class="form-label">Weight</label>
                                     <input readonly value="<?php echo $_POST["weight"];?>" type="text" placeholder="Weight" required class="form-control" id="name" name="weight">
                                 </div>
@@ -119,6 +123,10 @@ include("../../backend/config.php");
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Marketing Angle</label>
                                     <input readonly value="<?php echo $_POST["marketing_angle"];?>" type="text" placeholder="Marketing Angle" required class="form-control" id="name" name="marketing_angle">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="doc_name" class="form-label">Product Image</label> <br>
+                                    <img width="200px" src="<?php echo "../../documents/products/" . $_POST["file"]; ?>" alt="..." />
                                 </div>
                                
                                 <!-- <div class="mb-3">

@@ -117,7 +117,7 @@ include("../../backend/config.php");
                         <div class="row align-items-center">
                             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                 <!-- Title -->
-                                <h1 class="h2 mb-0 ls-tight">Manage Shipping Charges on Categories</h1>
+                                <h1 class="h2 mb-0 ls-tight">Manage Shipping Charges on Products</h1>
                             </div>
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
@@ -128,11 +128,11 @@ include("../../backend/config.php");
                                         </span>
                                         <span>Edit</span>
                                     </a> -->
-                                    <a href="./new_shipping_category.php" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                    <a href="./new_shipping_product.php" class="btn d-inline-flex btn-sm btn-primary mx-1">
                                         <span class=" pe-2">
                                             <i class="bi bi-plus"></i>
                                         </span>
-                                        <span>Add Shipping charge on Category</span>
+                                        <span>Add Shipping charge on Product</span>
                                     </a>
                                 </div>
                             </div>
@@ -160,7 +160,7 @@ include("../../backend/config.php");
                                 <thead class="thead-light">
                                     <tr>
                                         <th class="text-center" style="font-size: 12px;">Sno</th>
-                                        <th class="text-center" style="font-size: 12px;">Category Name</th>
+                                        <th class="text-center" style="font-size: 12px;">Product Name</th>
                                         <th class="text-center" style="font-size: 12px;">Currency</th>
                                         <th class="text-center" style="font-size: 12px;">Fixed Charge</th>
                                         <th class="text-center" style="font-size: 12px;">Pincode</th>
@@ -175,7 +175,7 @@ include("../../backend/config.php");
                                     <?php
                                     // echo $_GET['document_id12'];
 
-                                    $stmt = "SELECT id,category,currency,fixed_value,pincode,pin_value,range_km,range_value FROM `shipping_category` WHERE shipping_category.deleted_at IS NULL ORDER BY created_at DESC";
+                                    $stmt = "SELECT id,category,currency,fixed_value,pincode,pin_value,range_km,range_value FROM `shipping_product` WHERE shipping_product.deleted_at IS NULL ORDER BY created_at DESC";
                                     $sql = mysqli_prepare($conn, $stmt);
 
                                     $result = mysqli_stmt_execute($sql);
@@ -227,7 +227,7 @@ include("../../backend/config.php");
                                                     echo $row['range_value'];
                                                     ?>
                                                  <td>
-                                                    <form onsubmit="return confirm_delete()" action="../../backend/user/delete_shipping_category.php" method="post">
+                                                    <form onsubmit="return confirm_delete()" action="../../backend/user/delete_shipping_product.php" method="post">
                                                         <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
                                                         <button class="btn btn-neutral text-danger p-2 delete" style="font-size:12px;display:inline-block;">
                                                         <i class="bi bi-trash"></i>

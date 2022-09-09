@@ -180,7 +180,7 @@ include("../../backend/config.php");
                                     <?php
                                     // echo $_GET['document_id12'];
 
-                                    $stmt = "SELECT id,category,title,description,file,file_type,active,created_at,category,currency,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle FROM `product` 
+                                    $stmt = "SELECT id,category,title,description,file,file_type,active,created_at,category,currency,actual_price,sale_price,cost_price,sku_number,quantity,weight_unit,weight,tag,marketing_angle FROM `product` 
                                     WHERE deleted_at IS NULL AND active=(?) ORDER BY created_at DESC";
                                     $sql = mysqli_prepare($conn, $stmt);
 
@@ -266,9 +266,11 @@ include("../../backend/config.php");
                                                         <input type="text" name="cost_price" value="<?php echo $row["cost_price"]; ?>" hidden>
                                                         <input type="text" name="sku_number" value="<?php echo $row["sku_number"]; ?>" hidden>
                                                         <input type="text" name="quantity" value="<?php echo $row["quantity"]; ?>" hidden>
+                                                        <input type="text" name="weight_unit" value="<?php echo $row["weight_unit"]; ?>" hidden>
                                                         <input type="text" name="weight" value="<?php echo $row["weight"]; ?>" hidden>
                                                         <input type="text" name="tag" value="<?php echo $row["tag"]; ?>" hidden>
                                                         <input type="text" name="marketing_angle" value="<?php echo $row["marketing_angle"]; ?>" hidden>
+                                                        <input type="text" name="file" value="<?php echo $row["file"]; ?>" hidden>
 
                                                         <button class="btn btn-primary p-2" type="submit" style="margin-right:7px; font-size:12px; display:inline-block;">View Details</button>
                                                     </form>
@@ -289,6 +291,7 @@ include("../../backend/config.php");
                                                         <input type="text" name="cost_price" value="<?php echo $row["cost_price"]; ?>" hidden>
                                                         <input type="text" name="sku_number" value="<?php echo $row["sku_number"]; ?>" hidden>
                                                         <input type="text" name="quantity" value="<?php echo $row["quantity"]; ?>" hidden>
+                                                        <input type="text" name="weight_unit" value="<?php echo $row["weight_unit"]; ?>" hidden>
                                                         <input type="text" name="weight" value="<?php echo $row["weight"]; ?>" hidden>
                                                         <input type="text" name="tag" value="<?php echo $row["tag"]; ?>" hidden>
                                                         <input type="text" name="marketing_angle" value="<?php echo $row["marketing_angle"]; ?>" hidden>

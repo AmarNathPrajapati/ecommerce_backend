@@ -142,9 +142,19 @@ include("../../backend/config.php");
                                     <input value="<?php echo $_POST["quantity"]; ?>" type="text" placeholder="Qunatity" required class="form-control" id="name" name="quantity">
                                 </div>
                                 <div class="mb-3">
+                                    <label for="doc_name" class="form-label">Select weight Unit</label>
+                                    <select  name="weight_unit" id="">
+                                        <option value="<?php echo $_POST["weight_unit"]; ?>"><?php echo $_POST["weight_unit"]; ?></option>
+                                        <option value="mg">mg</option>
+                                        <option value="gram">gram</option>
+                                        <option value="Kg">Kg</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
                                     <label for="doc_name" class="form-label">Weight</label>
                                     <input value="<?php echo $_POST["weight"]; ?>" type="text" placeholder="Weight" required class="form-control" id="name" name="weight">
                                 </div>
+                               
 
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Tag</label>

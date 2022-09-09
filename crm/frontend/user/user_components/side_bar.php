@@ -78,9 +78,9 @@
                         <i class="bi bi-cart4"></i> Manage Shipping Charges
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="./shipping_category.php">For a Category</a></li>
-                            <li><a class="dropdown-item" href="./shipping_product.php">For a Particular Product</a></li>
-                            <li><a class="dropdown-item" href="./shipping_value.php">For a Total value</a></li>
+                            <li class="offset-1"><a class="dropdown-item" href="./shipping_category.php">For a Category</a></li>
+                            <li class="offset-1"><a class="dropdown-item" href="./shipping_product.php">For a Particular Product</a></li>
+
                         </ul>
                     </div>
                 </li>
@@ -92,9 +92,9 @@
                             </svg> Discount
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="./discount_category.php">Discount on Category</a></li>
-                            <li><a class="dropdown-item" href="./discount_order.php">Discount on Order</a></li>
-                            <li><a class="dropdown-item" href="./freeship_onorder.php">Freeship on Order</a></li>
+                            <li class="offset-1"><a class="dropdown-item" href="./discount_category.php">Discount on Category</a></li>
+                            <li class="offset-1"><a class="dropdown-item" href="./discount_order.php">Discount on Order</a></li>
+                            <li class="offset-1"><a class="dropdown-item" href="./freeship_onorder.php">Freeship on Order</a></li>
                         </ul>
                     </div>
                 </li>

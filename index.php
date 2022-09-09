@@ -103,7 +103,7 @@
                                             <div class="row">
                                                 <div class="col-md-10 col-12 offset-md-1">
                                                     <div class="mb-3">
-                                                        <input required placeholder="Name" name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp">
+                                                        <input required placeholder="Emai" name="email" type="mail" class="form-control" id="name" aria-describedby="emailHelp">
                                                     </div>
                                                 </div>
                                             </div>
