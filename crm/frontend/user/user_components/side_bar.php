@@ -41,17 +41,17 @@
                 </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="./customers.php">
-                    <i class="bi bi-people-fill"></i>Customers
+                        <i class="bi bi-people-fill"></i>Customers
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./manage_order_details.php">
-                    <i class="bi bi-bag-fill"></i>Manage Order Details
+                        <i class="bi bi-bag-fill"></i>Manage Order Details
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./manage_order_status.php">
-                    <i class="bi bi-people-fill"></i>Manage Order Status
+                        <i class="bi bi-people-fill"></i>Manage Order Status
                     </a>
                 </li>
                 <li class="nav-item">
@@ -68,15 +68,28 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./manage_products.php">
-                    <i class="bi bi-bag-fill"></i> Manage Products
+                        <i class="bi bi-bag-fill"></i> Manage Products
                     </a>
+                </li>
+            
+                <li class="nav-item ">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle side_discount" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-cart4"></i> Manage Shipping Charges
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="./shipping_category.php">For a Category</a></li>
+                            <li><a class="dropdown-item" href="./shipping_product.php">For a Particular Product</a></li>
+                            <li><a class="dropdown-item" href="./shipping_value.php">For a Total value</a></li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item ">
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle side_discount" data-bs-toggle="dropdown" aria-expanded="false">
-                            <svg  class="pe-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-down-arrow" viewBox="0 0 16 16">
+                            <svg class="pe-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-down-arrow" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z" />
-                            </svg> Discount 
+                            </svg> Discount
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="./discount_category.php">Discount on Category</a></li>

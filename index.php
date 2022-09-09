@@ -107,7 +107,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="col-md-10 col-12 offset-md-1">
                                                 <div class="mb-3">
                                                     <input required placeholder="Password" name="password" type="password" class="form-control" id="subject">
@@ -115,6 +115,9 @@
                                             </div>
                                             <div class="col-12 text-md-center">
                                                 <button class="btn btn-primary" type="submit">Submit</button>
+                                            </div>
+                                            <div class="col-12 text-md-center">
+                                                <a href="./recovery.php">Forgot Password! Click Here</a>
                                             </div>
                                         </div>
                                     </form>

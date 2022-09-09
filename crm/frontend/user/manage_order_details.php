@@ -115,7 +115,7 @@ include("../../backend/config.php");
                                 <!-- Title -->
                                 <h1 class="h2 mb-0 ls-tight">Order Details</h1>
                             </div>
-                            
+
                         </div>
                         <!-- Nav -->
                         <ul class="nav nav-tabs mt-4 overflow-x border-0">
@@ -221,7 +221,7 @@ include("../../backend/config.php");
                                                 <td style="font-size: 14px;">
                                                     <?php echo $row["order_status"]; ?>
                                                 </td>
-                                               
+
                                                 <td class="overflow_style2" style="font-size: 14px;">
                                                     <?php echo $row["created_at"]; ?>
                                                 </td>
@@ -269,7 +269,7 @@ include("../../backend/config.php");
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Order Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Order Status</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="../..//backend/user/edit_order_details.php" method="post">
@@ -277,7 +277,25 @@ include("../../backend/config.php");
                         <div class="mb-2 d-none">
                             <input type="number" name="service_id" class="form-control service_id" hidden readonly required>
                         </div>
-
+                        <!-- <div class="mb-3">
+                            <label for="category_name" class="form-label">Order Status</label><br>
+                            <select required name="service_name" id="category_name">
+                                <option disabled selected>Select Order Status</option>
+                                <?php
+                                // $stmt = "SELECT id,order_status FROM `order_status` WHERE order_status.deleted_at IS NULL ORDER BY created_at DESC";
+                                // $sql = mysqli_prepare($conn, $stmt);
+                                // $result = mysqli_stmt_execute($sql);
+                                // if ($result) {
+                                //     $data = mysqli_stmt_get_result($sql);
+                                //     while ($row = mysqli_fetch_array($data)) {
+                                // ?>
+                                //         <option value="<?php //echo $row['order_status']; ?>"><?php echo $row['order_status']; ?></option>
+                                // <?php
+                                //     }
+                                // }
+                                ?>
+                            </select>
+                        </div> -->
                         <div class="mb-2">
                             <input type="text" name="service_name" class="form-control edit service_name" required id="" placeholder="Enter Order Details Name">
                         </div>

@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+
+                <!DOCTYPE html>
 <html lang="en">
 <?php
-include('../../crm/backend/config.php');
+include("../../crm/backend/config.php");
 ?>
 
 <head>
@@ -25,7 +26,7 @@ include('../../crm/backend/config.php');
             <a class="navbar-brand" href="#!">Hello
                 <?php
                 session_start();
-                echo $_SESSION['username'];
+                echo $_SESSION["username"];
                 ?>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -45,7 +46,7 @@ include('../../crm/backend/config.php');
                         </ul>
                     </li>
                     <!-- Button trigger modal -->
-                    <a href="./crm/backend/user/new_customer_logout.php" type="button" class="btn btn-primary">
+                    <a href="/ecommerce/crm/backend/user/new_customer_logout.php" type="button" class="btn btn-primary">
                         logout
                     </a>
 
@@ -72,8 +73,8 @@ include('../../crm/backend/config.php');
                         <div class="mb-3">
                             <!-- dynamic categories -->
                             <div class="dropdown">
-                                <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Select Product Category
+                                <a class="btn btn-sm btn-outline-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Product Category
                                 </a>
 
 
@@ -87,8 +88,8 @@ include('../../crm/backend/config.php');
                                         while ($row = mysqli_fetch_array($data)) {
                                     ?>
                                             <li>
-                                                <a class="dropdown-item" href='<?php echo "/ecommerce/category/" . $row['service_name'] . "/index.php"; ?>'>
-                                                    <?php echo $row['service_name']; ?></a>
+                                                <a class="dropdown-item" href="<?php echo "/ecommerce/category/" . $row["service_name"] . "/index.php"; ?>">
+                                                    <?php echo $row["service_name"]; ?></a>
                                             </li>
 
                                     <?php
@@ -106,23 +107,26 @@ include('../../crm/backend/config.php');
                     if ($result) {
                         $data = mysqli_stmt_get_result($sql);
                         while ($row = mysqli_fetch_array($data)) {
-                            $category = $row['service_name'];
+                            $category = $row["service_name"];
                     ?>
                             <li class="nav-item dropdown mx-3">
-                                <img width="100px" src="<?php echo '../../crm/documents/category/' . $row['file'] ?>" alt="">
+                                <img width="60px" src="<?php echo "../../crm/documents/category/" . $row["file"] ?>" alt="">
+                                <a href="<?php echo "/ecommerce/category/" . $row["service_name"] . "/index.php"; ?>" class="text-decoration-none text-black d-block"><?php
+                                                                                                                                                                echo $category;
+                                                                                                                                                                ?></a>
                                 <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <?php
                                     $stmt1 = "SELECT id,title FROM `product` WHERE product.deleted_at IS NULL AND category = (?) ORDER BY created_at DESC";
                                     $sql1 = mysqli_prepare($conn, $stmt1);
-                                    mysqli_stmt_bind_param($sql1, 's', $category);
+                                    mysqli_stmt_bind_param($sql1, "s", $category);
                                     $result1 = mysqli_stmt_execute($sql1);
                                     if ($result1) {
                                         $data1 = mysqli_stmt_get_result($sql1);
                                         while ($row1 = mysqli_fetch_array($data1)) {
                                     ?>
-                                            <li><a class="dropdown-item" href="#"><?php echo $row1['title']; ?></a></li>
+                                            <li><a class="dropdown-item" href="#"><?php echo $row1["title"]; ?></a></li>
 
                                     <?php
                                         }
@@ -143,83 +147,18 @@ include('../../crm/backend/config.php');
     <!-- Header-->
     <!-- Section-->
     <section class="py-5">
-        <div class="container-fluid mt-5">
 
-            <!-- <p class="text-center services_desc">We position our clients at the forefront of their field by advancing an agenda.</p> -->
-            <!-- <div class="row mb-5">
-                <?php
-                include('./new_crm/backend/config.php');
-                $stmt = "SELECT id,title,description,file,file_type,php_file_location FROM `case_study` 
-                     WHERE deleted_at IS NULL AND active=(?) ORDER BY created_at DESC";
-                $sql = mysqli_prepare($conn, $stmt);
-
-                mysqli_stmt_bind_param($sql, 'i', $active);
-                $active = 1;
-
-                $result = mysqli_stmt_execute($sql);
-                if ($result) {
-                    $data = mysqli_stmt_get_result($sql);
-                    $sno = 1;
-                    if ($data->num_rows > 0) {
-                        while ($row = mysqli_fetch_array($data)) {
-                ?>
-                            <?php $loc = $row['php_file_location'] ?>
-                            <div class="col-12 mb-5 px-sm-4 col-sm-6 col-md-4 service_col">
-                                <div class="card border-0" style="max-width: 100%; margin: auto; cursor: pointer;  height: 100%;" onclick='window.location.href="./<?php echo $loc; ?>"'>
-
-                                    <?php
-                                    if ($row["file_type"] == "mp4") {
-                                    ?>
-                                        <video style="height:200px; width:100%; object-fit:cover;" class="card-img-top" controls>
-                                            <source src="./new_crm/documents/products/<?php echo $row["file"]; ?>" type="video/mp4">
-                                        </video>
-
-                                    <?php
-                                    } else if ($row["file_type"] == "0") {
-                                    ?>
-                                        <img src="./new_crm/default.png" style="max-width:100%; height:200px; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
-                                    <?php
-                                    } else {
-                                    ?>
-                                        <img src="./new_crm/documents/products/<?php echo $row["file"]; ?>" style="max-width:100%; height:200px; margin:auto; object-fit:cover;" class="card-img-top" alt="img">
-                                    <?php
-                                    }
-
-                                    ?>
-                                    <div class="card-body" style="background-color: #252B42;">
-
-                                        <h5 class="card-title"><?php echo $row["title"] == null ? "Not Available" : $row["title"]; ?></h5>
-                                        <p class="card-text" style="width: 100%;white-space: nowrap;overflow: hidden; text-overflow: ellipsis;"><?php echo $row["description"] == null ? "Not Available" : $row["description"]; ?> <br>
-                                            <button class="btn mt-2 btn-primary" onclick='window.location.href="./<?php echo $loc; ?>"'>Read More</button>
-                                        </p>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        <?php
-                        }
-                        mysqli_stmt_close($sql);
-                    } else {
-                        ?><h2>No Case Study Available</h2><?php
-                                                        }
-                                                    } else {
-                                                        echo mysqli_error($conn);
-                                                    }
-                                                            ?>
-
-            </div> -->
-        </div>
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 <?php
-                // echo $_GET['document_id12'];
+                // echo $_GET["document_id12"];
+                // change no. 01
                 $category = "Clothes";
                 $stmt = "SELECT id,category,title,description,file,file_type,active,created_at,category,currency,actual_price,sale_price,cost_price,sku_number,quantity,weight,tag,marketing_angle FROM `product` 
                                     WHERE deleted_at IS NULL AND active=(?) AND category =(?) ORDER BY created_at DESC";
                 $sql = mysqli_prepare($conn, $stmt);
 
-                mysqli_stmt_bind_param($sql, 'is', $active, $category);
+                mysqli_stmt_bind_param($sql, "is", $active, $category);
                 $active = 1;
                 $result = mysqli_stmt_execute($sql);
 
@@ -231,25 +170,25 @@ include('../../crm/backend/config.php');
                         <div class="col mb-5">
                             <div class="card h-100">
                                 <!-- Product image-->
-                                <img class="card-img-top" src='<?php echo "../../crm/documents/products/" . $row['file']; ?>' alt="..." />
+                                <img class="card-img-top" src="<?php echo "../../crm/documents/products/" . $row["file"]; ?>" alt="..." />
                                 <!-- Product details-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <!-- Product name-->
                                         <h5 class="fw-bolder">
                                             <?php
-                                            echo $row['title'];
+                                            echo $row["title"];
                                             ?>
                                         </h5>
                                         <!-- Product price-->
                                         <p style="text-decoration: line-through;">
                                             <?php
-                                            echo $row['actual_price'] . " " . $row['currency'];
+                                            echo $row["actual_price"] . " " . $row["currency"];
                                             ?>
                                         </p>
                                         <p>
                                             <?php
-                                            echo $row['sale_price'] . " " . $row['currency'];
+                                            echo $row["sale_price"] . " " . $row["currency"];
                                             ?>
                                         </p>
                                     </div>
@@ -257,6 +196,7 @@ include('../../crm/backend/config.php');
                                 <!-- Product actions-->
 
                                 <form action="./crm//frontend//user//product_details.php" method="post">
+
                                     <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
                                     <input type="number" name="active" value="<?php echo $row["active"]; ?>" hidden>
                                     <input type="text" name="file" value="<?php echo $row["file"]; ?>" hidden>
@@ -275,22 +215,58 @@ include('../../crm/backend/config.php');
                                     <input type="text" name="tag" value="<?php echo $row["tag"]; ?>" hidden>
                                     <input type="text" name="marketing_angle" value="<?php echo $row["marketing_angle"]; ?>" hidden>
 
-                                    
-                                    
                                 </form>
+
+                                <!-- <label for="quantity">Total Availability</label> -->
+
+                                <input readonly value="<?php
+                                if($row["quantity"]<5){
+                                    echo "only".$row["quantity"]."in stock"; 
+                                }else{
+                                    echo "In stock"; 
+                                }
+                                ?>" type="text">
+
                                 <button class="btn btn-sm btn-outline-primary h-50 my-2">
                                     Add to Cart
                                 </button>
-                                <button class="btn btn-sm btn-outline-primary h-50">
-                                    Order Now
-                                </button>
+                                <form action="../../crm/backend//user//new_order.php" method="post">
+                                    <input name="total" value="<?php echo $row["quantity"]; ?>" type="text" hidden>
 
+                                    <input type="number" name="product_id" value="<?php echo $row["id"]; ?>" hidden>
+
+                                    <input type="text" name="product_name" value="<?php echo $row["title"]; ?>" hidden>
+
+                                    <label min="0" for="quantity">Enter Quantity:</label>
+                                    <input id="quantity" type="number" name="order_quantity">
+                            <?php
+                        }
+                    }
+                            ?>
+                            <input type="text" name="order_status" value="Placed" hidden>
+
+                            <?php
+                            $username = $_SESSION["username"];
+                            $stmt = "SELECT id,name FROM `customers` WHERE customers.deleted_at is Null and name=
+                                    '$username'";
+                                    ;
+                            $sql = mysqli_prepare($conn, $stmt);
+                            $result = mysqli_stmt_execute($sql);
+                            if ($result) {
+                                $data = mysqli_stmt_get_result($sql);
+                                $row = mysqli_fetch_array($data)
+                            ?>
+                                <input type="number" name="user_id" value="<?php echo $row["id"]; ?>" hidden>
+                                <input type="text" name="user_name" value="<?php echo $row["name"]; ?>" hidden>
+                            <?php
+                            }
+                            ?>
+                            <button type="submit" class="btn btn-sm btn-outline-primary w-100 my-2">
+                                Order Now
+                            </button>
+                                </form>
                             </div>
                         </div>
-                <?php
-                    }
-                }
-                ?>
             </div>
         </div>
     </section>

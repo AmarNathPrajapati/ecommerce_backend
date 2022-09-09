@@ -210,8 +210,47 @@ if (!empty($result) && isset($result)) {
                             </form>
                         </div> -->
                         <div class="col-xl-3 col-sm-6 col-12">
-                            <form action="./customers.php" id="activity_form26" method="get">
+                            <form action="./manage_order_details.php" id="activity_form26" method="get">
                                 <a onclick="document.getElementById('activity_form26').submit();">
+                                    <div class="card shadow border-0 overflow_style" style="height: 130px; cursor:pointer;">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <span class="h6 font-semibold text-muted 
+                                                    text-sm d-block mb-2 text-truncate">Order Details</span>
+                                                    <?php
+
+                                                    $stmt = "SELECT count(order_id) FROM `order_details` WHERE deleted_at IS NULL";
+                                                    $sql = mysqli_prepare($conn, $stmt);
+
+                                                    // $is_admin=0;
+                                                    // mysqli_stmt_bind_param($sql,'i',$is_admin);
+
+                                                    $result = mysqli_stmt_execute($sql);
+                                                    if ($result) {
+                                                        $data = mysqli_stmt_get_result($sql);
+                                                        $sno = 1;
+                                                        while ($row = mysqli_fetch_array($data)) {
+                                                    ?>
+                                                            <span class="h3 font-bold mb-0"><?php echo $row[0]; ?></span>
+                                                    <?php }
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                                                        <i class="bi bi-bag-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </form>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <form action="./customers.php" id="activity_form28" method="get">
+                                <a onclick="document.getElementById('activity_form28').submit();">
                                     <div class="card shadow border-0 overflow_style" style="height: 130px; cursor:pointer;">
                                         <div class="card-body">
                                             <div class="row">

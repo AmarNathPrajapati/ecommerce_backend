@@ -87,7 +87,7 @@ include('./crm/backend/config.php');
                                         while ($row = mysqli_fetch_array($data)) {
                                     ?>
                                             <li>
-                                                <a id="<?php echo $row['service_name']; ?>"  class="dropdown-item" href='<?php echo "./category/" . $row['service_name'] . "/index.php"; ?>'>
+                                                <a id="<?php echo $row['service_name']; ?>" class="dropdown-item" href='<?php echo "./category/" . $row['service_name'] . "/index.php"; ?>'>
                                                     <?php echo $row['service_name']; ?></a>
                                             </li>
 
@@ -109,10 +109,10 @@ include('./crm/backend/config.php');
                             $category = $row['service_name'];
                     ?>
                             <li class="nav-item dropdown mx-3">
-                                <img  width="60px" src="<?php echo './crm/documents/category/' . $row['file'] ?>" alt="">
+                                <img width="60px" src="<?php echo './crm/documents/category/' . $row['file'] ?>" alt="">
                                 <a href='<?php echo "./category/" . $row['service_name'] . "/index.php"; ?>' class="text-decoration-none text-black d-block"><?php
-                                    echo $category;
-                                ?></a>
+                                                                                                                                                                echo $category;
+                                                                                                                                                                ?></a>
                                 <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

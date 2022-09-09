@@ -45,7 +45,7 @@ include('../../crm/backend/config.php');
                         </ul>
                     </li>
                     <!-- Button trigger modal -->
-                    <a href="./crm/backend/user/new_customer_logout.php" type="button" class="btn btn-primary">
+                    <a href="/ecommerce/crm/backend/user/new_customer_logout.php" type="button" class="btn btn-primary">
                         logout
                     </a>
 
@@ -72,8 +72,8 @@ include('../../crm/backend/config.php');
                         <div class="mb-3">
                             <!-- dynamic categories -->
                             <div class="dropdown">
-                                <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Select Product Category
+                                <a class="btn btn-sm btn-outline-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Product Category
                                 </a>
 
 
@@ -109,7 +109,10 @@ include('../../crm/backend/config.php');
                             $category = $row['service_name'];
                     ?>
                             <li class="nav-item dropdown mx-3">
-                                <img width="100px" src="<?php echo '../../crm/documents/category/' . $row['file'] ?>" alt="">
+                                <img width="60px" src="<?php echo '../../crm/documents/category/' . $row['file'] ?>" alt="">
+                                <a href='<?php echo "/ecommerce/category/" . $row['service_name'] . "/index.php"; ?>' class="text-decoration-none text-black d-block"><?php
+                                                                                                                                                                echo $category;
+                                                                                                                                                                ?></a>
                                 <a class="nav-link dropdown-toggle text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -221,19 +224,19 @@ include('../../crm/backend/config.php');
                                     Add to Cart
                                 </button>
                                 <form action="../../crm/backend//user//new_order.php" method="post">
-                                <input name="total" value="<?php echo $row["quantity"]; ?>" type="text" hidden>
+                                    <input name="total" value="<?php echo $row["quantity"]; ?>" type="text" hidden>
 
                                     <input type="number" name="product_id" value="<?php echo $row["id"]; ?>" hidden>
 
                                     <input type="text" name="product_name" value="<?php echo $row["title"]; ?>" hidden>
 
                                     <label for="quantity">Enter Quantity:</label>
-                                    <input id="quantity" type="number" name="order_quantity">
+                                    <input min="0" id="quantity" type="number" name="order_quantity">
                             <?php
                         }
                     }
                             ?>
-                            <input type="text" name="order_status" value="accepted" hidden>
+                            <input type="text" name="order_status" value="Placed" hidden>
 
                             <?php
                             $username = $_SESSION['username'];

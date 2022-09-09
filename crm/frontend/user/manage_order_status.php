@@ -1,13 +1,13 @@
 <?php
 session_start();
 if (!isset($_SESSION["is_admin"])) {
-  header("location: ../login.php");
+    header("location: ../login.php");
 }
 include("../../backend/config.php");
 ?>
 
 
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -112,14 +112,14 @@ include("../../backend/config.php");
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="../..//backend/user/new_order_status.php" method="post">
-                            <div class="modal-body">
-                                <label for="cname">Add Order Status</label>
-                                <input id="cname" type="text" name="service_name" class="form-control " required placeholder="Enter Order Status Name">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
+                        <div class="modal-body">
+                            <label for="cname">Add Order Status</label>
+                            <input id="cname" type="text" name="service_name" class="form-control " required placeholder="Enter Order Status Name">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -166,25 +166,25 @@ include("../../backend/config.php");
                                         <div class="col">
                                             <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total Order Status</span>
                                             <?php
-                        
-                                                    $stmt="SELECT count(id) FROM `order_status` WHERE deleted_at IS NULL";
-                                                    $sql=mysqli_prepare($conn, $stmt);
 
-                                                    // $is_admin=2;
-                                                    // mysqli_stmt_bind_param($sql,'i',$is_admin);
-                                        
-                                                    $result=mysqli_stmt_execute($sql);
-                                                        if ($result){
-                                                            $data= mysqli_stmt_get_result($sql);
-                                                            $sno=1;
-                                                            while ($row = mysqli_fetch_array($data)){
-                                                        ?>
-                                            <span class="h3 font-bold mb-0">
-                                                <?php echo $row[0]; ?>
-                                            </span>
+                                            $stmt = "SELECT count(id) FROM `order_status` WHERE deleted_at IS NULL";
+                                            $sql = mysqli_prepare($conn, $stmt);
+
+                                            // $is_admin=2;
+                                            // mysqli_stmt_bind_param($sql,'i',$is_admin);
+
+                                            $result = mysqli_stmt_execute($sql);
+                                            if ($result) {
+                                                $data = mysqli_stmt_get_result($sql);
+                                                $sno = 1;
+                                                while ($row = mysqli_fetch_array($data)) {
+                                            ?>
+                                                    <span class="h3 font-bold mb-0">
+                                                        <?php echo $row[0]; ?>
+                                                    </span>
                                             <?php }
-                                                    }
-                                                ?>
+                                            }
+                                            ?>
                                         </div>
                                         <div class="col-auto">
                                             <!-- <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
@@ -203,79 +203,74 @@ include("../../backend/config.php");
                             <h5 class="mb-0">Order Statuses</h5>
                         </div>
                         <div class="table-responsive" style="padding: 30px 18px;">
-                            <table class="table table-hover table-nowrap" id="myTable"
-                                style="padding: 30px 2px; border: 0px solid black !important;">
+                            <table class="table table-hover table-nowrap" id="myTable" style="padding: 30px 2px; border: 0px solid black !important;">
                                 <thead class="thead-light">
                                     <tr>
                                         <th style="font-size: 16px;">Sno</th>
                                         <th style="font-size: 16px;">
-                                        Status Name</th>
-                                        
+                                            Status Name</th>
+
                                         <th style="font-size: 16px;">Created At</th>
                                         <th style="font-size: 16px;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody style="border: 0px solid black !important;">
                                     <?php
-                                   
-                                        $stmt="SELECT id,order_status,created_at FROM `order_status` WHERE order_status.deleted_at IS NULL ORDER BY created_at DESC";
-                                        $sql=mysqli_prepare($conn, $stmt);
 
-                                        // mysqli_stmt_bind_param($sql,'i',$is_admin);
-                                        $is_admin=1;
-                            
-                                        $result=mysqli_stmt_execute($sql);
-                                        if ($result){
-                                                $data= mysqli_stmt_get_result($sql);
-                                                $sno=1;
-                                                while ($row = mysqli_fetch_array($data)){
+                                    $stmt = "SELECT id,order_status,created_at FROM `order_status` WHERE order_status.deleted_at IS NULL ORDER BY created_at DESC";
+                                    $sql = mysqli_prepare($conn, $stmt);
+
+                                    // mysqli_stmt_bind_param($sql,'i',$is_admin);
+                                    $is_admin = 1;
+
+                                    $result = mysqli_stmt_execute($sql);
+                                    if ($result) {
+                                        $data = mysqli_stmt_get_result($sql);
+                                        $sno = 1;
+                                        while ($row = mysqli_fetch_array($data)) {
                                     ?>
-                                    <tr>
-                                        <td style="font-size: 14px;">
-                                            <?php echo $sno;?>
-                                        </td>
+                                            <tr>
+                                                <td style="font-size: 14px;">
+                                                    <?php echo $sno; ?>
+                                                </td>
 
-                                        <td style="font-size: 14px;">
-                                            <?php echo $row["order_status"];?>
-                                        </td>
-                                        
-                                      
-                                        <td class="overflow_style2" style="font-size: 14px;">
-                                            <?php echo $row["created_at"];?>
-                                        </td>
+                                                <td style="font-size: 14px;">
+                                                    <?php echo $row["order_status"]; ?>
+                                                </td>
 
-                                        <td class="d-flex p-1">
 
-                                           
-                                                
-                                            <button type="submit" class="btn btn-outline-primary text-danger-hover p-2" 
-                                            onclick="setId(<?php echo $row['id'];?>,'<?php echo $row['order_status'];?>')" style="font-size: 14px; margin-left: 10px;">
-                                                <span style="font-size: 14px;">Edit</span>
-                                            </button>
-                                           
+                                                <td class="overflow_style2" style="font-size: 14px;">
+                                                    <?php echo $row["created_at"]; ?>
+                                                </td>
 
-                                            <form action="../../backend/user/delete_order_status.php" onsubmit="return confirm_delete()" method="post">
-                                                <input type="number" hidden name="service_id"
-                                                    value="<?php echo $row['id'];?>">
-                                                <button type="submit" class="btn btn-outline-danger text-danger-hover p-2"
-                                                    style="font-size: 14px; margin-left: 10px;">
+                                                <td class="d-flex p-1">
 
-                                                   <span style="font-size: 14px;">Delete</span>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
+
+
+                                                    <button type="submit" class="btn btn-outline-primary text-danger-hover p-2" onclick="setId(<?php echo $row['id']; ?>,'<?php echo $row['order_status']; ?>')" style="font-size: 14px; margin-left: 10px;">
+                                                        <span style="font-size: 14px;">Edit</span>
+                                                    </button>
+
+
+                                                    <form action="../../backend/user/delete_order_status.php" onsubmit="return confirm_delete()" method="post">
+                                                        <input type="number" hidden name="service_id" value="<?php echo $row['id']; ?>">
+                                                        <button type="submit" class="btn btn-outline-danger text-danger-hover p-2" style="font-size: 14px; margin-left: 10px;">
+
+                                                            <span style="font-size: 14px;">Delete</span>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                     <?php
-                                    $sno++;
+                                            $sno++;
+                                        }
+                                        mysqli_stmt_close($sql);
+                                        mysqli_close($conn);
+                                    } else {
+                                        echo mysqli_error($conn);
                                     }
-                                    mysqli_stmt_close($sql);
-                                    mysqli_close($conn);
-                                }
-                                else{
-                                   echo mysqli_error($conn);
-                                }
-                                
-                                ?>
+
+                                    ?>
 
                                 </tbody>
                             </table>
@@ -287,7 +282,7 @@ include("../../backend/config.php");
         </div>
     </div>
 
-    <div class="modal fade" id="editModal" tabindex="-1"  aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
@@ -295,30 +290,28 @@ include("../../backend/config.php");
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="../..//backend/user/edit_order_status.php" method="post">
-                        <div class="modal-body">
-                            <div class="mb-2 d-none">
-                                <input type="number" name="service_id" class="form-control service_id" hidden readonly  required  >
-                            </div>
-
-                            <div class="mb-2">
-                                <input type="text" name="service_name" class="form-control edit service_name" required id="" placeholder="Enter Order Status Name">
-                            </div>
-
+                    <div class="modal-body">
+                        <div class="mb-2 d-none">
+                            <input type="number" name="service_id" class="form-control service_id" hidden readonly required>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                        <div class="mb-2">
+                            <input type="text" name="service_name" class="form-control edit service_name" required id="" placeholder="Enter Order Status Name">
                         </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 
 
-    
+
 
     <script>
-         
         function confirm_delete() {
             var confirm_del = confirm("Are you sure ?");
             if (confirm_del == true) {
@@ -337,24 +330,23 @@ include("../../backend/config.php");
     </script>
 
 
-    <?php require('./user_components/scripts.php');?>
+    <?php require('./user_components/scripts.php'); ?>
 
 
-    <script> 
-        function setId(id,service_name){
+    <script>
+        function setId(id, service_name) {
 
-            if (id=="" || id==null || service_name=="" || service_name==null) {
+            if (id == "" || id == null || service_name == "" || service_name == null) {
                 alert("Something went wrong");
                 window.location.reload();
             }
 
-            document.getElementsByClassName('service_id')[0].value=id;
-            document.getElementsByClassName('edit service_name')[0].value=service_name;
+            document.getElementsByClassName('service_id')[0].value = id;
+            document.getElementsByClassName('edit service_name')[0].value = service_name;
             $('#editModal').modal('show');
 
 
         }
-
     </script>
 
 </body>

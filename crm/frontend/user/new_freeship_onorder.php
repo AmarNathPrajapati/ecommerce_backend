@@ -61,27 +61,14 @@ include("../../backend/config.php");
                             <form action="../../backend/user/new_freeship_onorder.php" method="post" enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <div class="mb-3">
-                                        <label for="category_name" class="form-label">Product Name</label><br>
+                                        <label for="ftype" class="form-label">Shipping Charge Type</label><br>
                                         <!-- dynamic categories -->
-                                        <select required name="category" id="category_name">
-                                            <option disabled selected>Select Product</option>
-                                            <?php
-                                            $stmt = "SELECT id,title FROM `product` WHERE product.deleted_at IS NULL ORDER BY created_at DESC";
-                                            $sql = mysqli_prepare($conn, $stmt);
-                                            $result = mysqli_stmt_execute($sql);
-                                            if ($result) {
-                                                $data = mysqli_stmt_get_result($sql);
-                                                while ($row = mysqli_fetch_array($data)) {
-                                            ?>
-                                                    <option value="<?php echo $row['title']; ?>"><?php echo $row['title']; ?></option>
-                                            <?php
-                                                }
-                                            }
-                                            ?>
+                                        <select name="freeship_type" id="ftype">
+                                            <option value="For a Category">For a Category</option>
+                                            <option value="For a Total value">For a Total Value</option>
+                                            <option value="For a Particular Product">For a Particular Product</option>
                                         </select>
                                     </div>
-                                    <label for="">Freeeship on Minimum Order</label>
-                                    <input name="dis_value" type="text" class="form-control " required id="" placeholder="Add Minimum Order">
                                     <label for="currency" class="form-label">Select Currency</label><br>
                                     <!-- dynamic categories -->
                                     <select name="currency" id="currency">
@@ -100,12 +87,37 @@ include("../../backend/config.php");
                                         ?>
                                     </select> <br>
                                     
-                                    <label for="">Above a Total value</label>
+                                    <label class="mt-2" for="">shipping charge Fixed Amount</label>
                                     <input name="total_value" type="text" class="form-control " required id="" placeholder="Enter Total Value">
-                                    <label for="">Start Date</label>
-                                    <input name="start_date" type="date" class="form-control " required id="" placeholder="Enter Start Date">
-                                    <label for="">End Date</label>
-                                    <input name="end_date" type="date" class="form-control " required id="" placeholder="Enter End Date">
+
+                                    <label for="">shipping Charge based on Pincode </label>
+                                    <div class="container">
+                                        <div class="row pt-2">
+                                            <div class="col-6">
+                                                <label for="">Pincode</label>
+                                                <input name="total_value" type="text" class="form-control " required id="" placeholder="Enter Total Value">
+                                                
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Shipping Charge</label>
+                                                <input name="total_value" type="text" class="form-control " required id="" placeholder="Enter Total Value">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label for="">Shipping Charge Based On Range</label>
+                                    <div class="container">
+                                        <div class="row pt-2">
+                                            <div class="col-6">
+                                                <label for="">Range</label>
+                                                <input name="total_value" type="text" class="form-control " required id="" placeholder="Enter Total Value">
+                                                
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="">Shipping Charge</label>
+                                                <input name="total_value" type="text" class="form-control " required id="" placeholder="Enter Total Value">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>
                                     <button type="submit" class="btn btn-primary">Save</button>
