@@ -55,7 +55,7 @@ include("../../backend/config.php");
 
                     <div class="card shadow border-0 mb-7 p-sm-5">
                         <div class="form-box px-sm-5 mb-5">
-                            <form class="px-sm-5" action="../../backend/user/edit_discount_category.php" onsubmit="return showloader()" method="post" enctype="multipart/form-data">
+                            <form class="px-sm-5" action="../../backend/user/edit_freeship.php" onsubmit="return showloader()" method="post" enctype="multipart/form-data">
 
                                 <input type="number" hidden name="id" value="<?php echo $_POST["id"]; ?>">
 
@@ -65,16 +65,16 @@ include("../../backend/config.php");
                                     <select name="category" id="category_name">
                                         <option value="<?php echo $_POST["category"]; ?>" selected><?php echo $_POST["category"]; ?></option>
                                         <?php
-                                        $stmt = "SELECT distinct id,service_name,created_at FROM `services` WHERE services.deleted_at IS NULL ORDER BY created_at DESC";
+                                        $stmt = "SELECT distinct id,title FROM `product` WHERE product.deleted_at IS NULL ORDER BY created_at DESC";
                                         $sql = mysqli_prepare($conn, $stmt);
                                         $result = mysqli_stmt_execute($sql);
                                         if ($result) {
                                             $data = mysqli_stmt_get_result($sql);
                                             while ($row = mysqli_fetch_array($data)) {
-                                                if ($_POST["category"] == $row['service_name'])
+                                                if ($_POST["category"] == $row['title'])
                                                     continue;
                                         ?>
-                                                <option value="<?php echo $row['service_name']; ?>"><?php echo $row['service_name']; ?></option>
+                                                <option value="<?php echo $row['title']; ?>"><?php echo $row['title']; ?></option>
                                         <?php
                                             }
                                         }
@@ -126,16 +126,6 @@ include("../../backend/config.php");
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
-
-
-
-                                <!-- <div class="mb-3">
-                                    <label class="form-label" for="file">Product Image/Video</label>
-                                    <input type="file"  accept=".png,.jpg,.jpeg,video/*" class="form-control" name="document" id="file">
-                                    <p class="text-danger">Only .png,.jpg,.jpeg,.mp4 type file formate and less than 5 mb file is supportted.</p>
-                                </div> -->
-
-
                             </form>
                         </div>
                     </div>

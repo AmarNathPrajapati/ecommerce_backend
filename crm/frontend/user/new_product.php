@@ -58,7 +58,7 @@ include("../../backend/config.php");
                         </div> -->
 
                         <div class="form-box px-sm-5 mb-5">
-                            <form class="px-sm-5" action="../../backend/user/new_product.php" onsubmit="return showloader()" method="post" enctype="multipart/form-data">
+                            <form name="product_form" class="px-sm-5" action="../../backend/user/new_product.php" onsubmit="return validateForm()" method="post" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label for="category_name" class="form-label">Product Category</label><br>
                                     <!-- dynamic categories -->
@@ -132,7 +132,7 @@ include("../../backend/config.php");
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Quantity</label>
-                                    <input type="text" placeholder="Qunatity" class="form-control" id="name" name="quantity">
+                                    <input type="number" placeholder="Qunatity" class="form-control" id="name" name="quantity">
                                 </div>
                                 <div class="mb-3">
                                     <label for="doc_name" class="form-label">Select weight Unit</label>
@@ -181,9 +181,22 @@ include("../../backend/config.php");
         </div>
     </div>
 
-
     <?php require('./user_components/scripts.php'); ?>
-
+    <script>
+        function validateForm(){
+            let val = true;
+            let pincode = document.forms['product_form']['pincode'].value;
+            console.log(pincode);
+            let regex = /[A-Za-z!@#$%^&*]/;
+            let val3 = regex.test(pincode);
+            console.log(val3);
+            if(regex.test(pincode)){
+                alert("Please Enter the valid pincode")
+                val = false;
+            }
+            return val;
+        }
+    </script>
 </body>
 
 </html>

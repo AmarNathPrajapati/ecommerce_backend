@@ -35,7 +35,7 @@ include("../../backend/config.php");
                         <div class="row align-items-center">
                             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                 <!-- Title -->
-                                <h1 class="h2 mb-0 ls-tight mb-3">Add Discount on Category</h1>
+                                <h1 class="h2 mb-0 ls-tight mb-3">Add Discount on Product</h1>
                             </div>
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
@@ -58,22 +58,22 @@ include("../../backend/config.php");
                         </div> -->
 
                         <div class="form-box px-sm-5 mb-5">
-                        <form action="../../backend/user/new_discount_category.php" method="post" enctype="multipart/form-data">
+                        <form action="../../backend/user/new_discount_product.php" method="post" enctype="multipart/form-data">
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="category_name" class="form-label">Product Category</label><br>
+                                <label for="category_name" class="form-label">Product</label><br>
                                 <!-- dynamic categories -->
                                 <select required name="category" id="category_name">
-                                    <option disabled selected>Select Categories</option>
+                                    <option disabled selected>Select Product</option>
                                     <?php
-                                    $stmt = "SELECT id,service_name,created_at FROM `services` WHERE services.deleted_at IS NULL ORDER BY created_at DESC";
+                                    $stmt = "SELECT id,title FROM `product` WHERE product.deleted_at IS NULL ORDER BY created_at DESC";
                                     $sql = mysqli_prepare($conn, $stmt);
                                     $result = mysqli_stmt_execute($sql);
                                     if ($result) {
                                         $data = mysqli_stmt_get_result($sql);
                                         while ($row = mysqli_fetch_array($data)) {
                                     ?>
-                                            <option value="<?php echo $row['service_name']; ?>"><?php echo $row['service_name']; ?></option>
+                                            <option value="<?php echo $row['title']; ?>"><?php echo $row['title']; ?></option>
                                     <?php
                                         } 
                                     }

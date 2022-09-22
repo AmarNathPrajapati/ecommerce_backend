@@ -111,7 +111,7 @@ include("../../backend/config.php");
                         <h5 class="modal-title" id="exampleModalLabel">New Currency</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="../..//backend/user/new_currency.php" method="post">
+                    <form name="currency_form" onsubmit="return formValidate()" action="../..//backend/user/new_currency.php" method="post">
                             <div class="modal-body">
                                 <label for="cname">Currency Name</label>
                                 <input id="cname" type="text" name="service_name" class="form-control " required placeholder="Enter Currency Name">
@@ -359,12 +359,21 @@ include("../../backend/config.php");
             document.getElementsByClassName('edit service_name')[0].value=service_name;
             document.getElementsByClassName('edit currency_symbol')[0].value=currency_symbol;
             $('#editModal').modal('show');
-
-
         }
-
     </script>
 
+    <script>
+        function formValidate(){
+            let val = true;
+            let currency = document.forms['currency_form']['currency_symbol'].value;
+            let regex = /[a-zA-Z0-9]/;
+            if(regex.test(currency)){
+                alert("Not a valid Currency Symbol");
+                val = false;
+            }
+            return val;
+        }
+    </script>
 </body>
 
 </html>

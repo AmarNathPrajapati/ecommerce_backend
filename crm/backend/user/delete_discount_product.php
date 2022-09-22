@@ -1,7 +1,7 @@
 <?php 
   include('../config.php');
     if (!empty($_POST["id"])) {
-    $stmt="UPDATE `discount_category` SET deleted_at=? WHERE id=(?)";
+    $stmt="UPDATE `discount_order` SET deleted_at=? WHERE id=(?)";
     $sql=mysqli_prepare($conn, $stmt);
 
     //binding the parameters to prepard statement
@@ -13,14 +13,14 @@
             mysqli_stmt_close($sql);
             mysqli_close($conn);
             echo "<script>
-                        window.location.href='../../frontend/user/discount_oncategory.php';
+                        window.location.href='../../frontend/user/discount_onproduct.php';
                         </script>";
         } else {
         echo mysqli_error($conn); 
         mysqli_stmt_close($sql);
         mysqli_close($conn);
         echo "<script>alert('Sorry!! Something went wrong');
-        window.location.href='../../frontend/user/discount_oncategory.php';
+        window.location.href='../../frontend/user/discount_onproduct.php';
         </script>";
         }
     } 
@@ -29,7 +29,7 @@
         mysqli_close($conn);
         echo '<script>
         alert("Something went wrong. We are facing some technical issue. It will be resolved soon. "'.mysqli_error($conn).')
-        window.location.href="../../frontend/user/discount_oncategory.php"
+        window.location.href="../../frontend/user/discount_onproduct.php"
         <script>';
     }
     

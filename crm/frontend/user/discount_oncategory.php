@@ -117,7 +117,7 @@ include("../../backend/config.php");
                         <div class="row align-items-center">
                             <div class="col-sm-6 col-12 mb-4 mb-sm-0">
                                 <!-- Title -->
-                                <h1 class="h2 mb-0 ls-tight">Manage Freeship</h1>
+                                <h1 class="h2 mb-0 ls-tight">Manage Discount on Categories</h1>
                             </div>
                             <!-- Actions -->
                             <div class="col-sm-6 col-12 text-sm-end">
@@ -128,11 +128,11 @@ include("../../backend/config.php");
                                         </span>
                                         <span>Edit</span>
                                     </a> -->
-                                    <a href="./new_freeship.php" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                    <a href="./new_discount_category.php" class="btn d-inline-flex btn-sm btn-primary mx-1">
                                         <span class=" pe-2">
                                             <i class="bi bi-plus"></i>
                                         </span>
-                                        <span>Add Freeship</span>
+                                        <span>Add Discount on Category</span>
                                     </a>
                                 </div>
                             </div>
@@ -159,14 +159,13 @@ include("../../backend/config.php");
                             <table class="table table-hover table-nowrap" id="myTable" style="border: 0px solid black !important; padding: 30px 2px;">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th class="text-center" style="font-size: 12px;">Sno</th>
-                                        <th class="text-center" style="font-size: 12px;">Currency</th>
-                                        <th class="text-center" style="font-size: 12px;">Freeship type</th>
-                                        <th class="text-center" style="font-size: 12px;">Category/Product/ <br> above total value/ <br> minimum order</th>
-                                        <th class="text-center" style="font-size: 12px;">Created At</th>
-                                        <th class="text-center" style="font-size: 12px;">Start Date</th>
-                                        <th class="text-center" style="font-size: 12px;">End Date</th>
-
+                                        <th style="font-size: 12px;">Sno</th>
+                                        <th style="font-size: 12px;">Category Name</th>
+                                        <th style="font-size: 12px;">Currency</th>
+                                        <th style="font-size: 12px;">Discount type</th>
+                                        <th style="font-size: 12px;">Value/Percentage</th>
+                                        <th style="font-size: 12px;">Start Date</th>
+                                        <th style="font-size: 12px;">End Date</th>
                                         <th class="text-center" style="font-size: 12px;">Action</th>
                                         <th class="text-center" style="font-size: 12px;"></th>
                                     </tr>
@@ -175,7 +174,7 @@ include("../../backend/config.php");
                                     <?php
                                     // echo $_GET['document_id12'];
 
-                                    $stmt = "SELECT id,currency,freeship_type,freeship_value,start_date,end_date,created_at FROM `freeship` WHERE freeship.deleted_at IS NULL ORDER BY created_at DESC";
+                                    $stmt = "SELECT id,category,currency,dis_type,value_per,start_date,end_date,created_at FROM `discount_category` WHERE discount_category.deleted_at IS NULL ORDER BY created_at DESC";
                                     $sql = mysqli_prepare($conn, $stmt);
 
                                     $result = mysqli_stmt_execute($sql);
@@ -185,7 +184,7 @@ include("../../backend/config.php");
                                         $sno = 1;
                                         while ($row = mysqli_fetch_array($data)) {
                                     ?>
-                                            <tr class="text-center">
+                                            <tr class="text-center" >
                                                 <td>
                                                     <?php
                                                     echo $sno;
@@ -193,54 +192,56 @@ include("../../backend/config.php");
                                                 </td>
                                                 <td>
                                                     <?php
-                                                    echo $row['currency'];
-                                                    ?>
-                                                </td>
-                                               
-                                                <td>
-                                                    <?php
-                                                    echo $row['freeship_type'];
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    echo $row['freeship_value'];
-                                                    ?>
-                                                </td>
-
-                                                <td>
-                                                    <?php
-                                                    echo $row['created_at'];
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    echo $row['start_date'];
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    echo $row['end_date'];
+                                                    echo $row['category'];
                                                     ?>
                                                 </td>
                                                 
-                                                <!-- <td>
-                                                    <form action="./edit_freeship.php" method="post">
+                                                <td>
+                                                    <?php
+                                                    echo $row['currency'];
+                                                    ?>
+                                                </td>
+                                                
+                                                <td>
+                                                    <?php
+                                                    echo $row['dis_type'];
+                                                    ?>
+                                                </td>
+                                                
+                                                <td>
+                                                    <?php
+                                                    echo $row['value_per'];
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                    echo $row['start_date']
+                                                    ?>
+                                                </td>
+                                                <td> 
+                                                    <?php
+                                                    echo $row['end_date']
+                                                    ?>
+                                                </td>
+                                                
+                                                <td>
+                                                    <form action="./edit_discount_category.php" method="post">
                                                     <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
-                                                        <input type="text" name="currency" value="<?php echo $row["currency"]; ?>" hidden>
+                                                        <input type="text" name="category" value="<?php echo $row["category"]; ?>" hidden>
 
-                                                        <input type="text" name="freeship_type" value="<?php echo $row["freeship_type"]; ?>" hidden>
-                                                        <input type="text" name="freeship_value" value="<?php echo $row["freeship_value"]; ?>" hidden>
+                                                        <input type="text" name="currency" value="<?php echo $row["currency"]; ?>" hidden>
+                                                        <input type="text" name="dis_type" value="<?php echo $row["dis_type"]; ?>" hidden>
+
+                                                        <input type="text" name="value_per" value="<?php echo $row["value_per"]; ?>" hidden>
                                                         <input type="text" name="start_date" value="<?php echo $row["start_date"]; ?>" hidden>
 
                                                         <input type="text" name="end_date" value="<?php echo $row["end_date"]; ?>" hidden>
 
-
                                                         <button class="btn btn-warning p-2" type="submit" style="margin-right:7px; font-size:12px; display:inline-block;">Edit</button>
                                                     </form>
-                                                </td> -->
+                                                </td>
                                                 <td>
-                                                    <form onsubmit="return confirm_delete()" action="../../backend/user/delete_freeship.php" method="post">
+                                                    <form onsubmit="return confirm_delete()" action="../../backend/user/delete_discount_category.php" method="post">
                                                         <input type="number" name="id" value="<?php echo $row["id"]; ?>" hidden>
                                                         <button class="btn btn-neutral text-danger p-2 delete" style="font-size:12px;display:inline-block;">
                                                             <i class="bi bi-trash"></i>

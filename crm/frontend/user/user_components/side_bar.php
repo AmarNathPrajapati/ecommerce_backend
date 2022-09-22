@@ -71,11 +71,11 @@
                         <i class="bi bi-bag-fill"></i> Manage Products
                     </a>
                 </li>
-            
+
                 <li class="nav-item ">
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle side_discount" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-cart4"></i> Manage Shipping Charges
+                            <i class="bi bi-cart4"></i> Manage Shipping Charges
                         </a>
                         <ul class="dropdown-menu">
                             <li class="offset-1"><a class="dropdown-item" href="./shipping_category.php">For a Category</a></li>
@@ -83,6 +83,11 @@
 
                         </ul>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./manage_freeship.php">
+                        <i class="bi bi-cart4"></i> Manage Freeship
+                    </a>
                 </li>
                 <li class="nav-item ">
                     <div class="dropdown">
@@ -92,18 +97,17 @@
                             </svg> Discount
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="offset-1"><a class="dropdown-item" href="./discount_category.php">Discount on Category</a></li>
-                            <li class="offset-1"><a class="dropdown-item" href="./discount_order.php">Discount on Order</a></li>
-                            <li class="offset-1"><a class="dropdown-item" href="./freeship_onorder.php">Freeship on Order</a></li>
+                            <li class="offset-1"><a class="dropdown-item" href="./discount_oncategory.php">Discount on Category</a></li>
+                            <li class="offset-1"><a class="dropdown-item" href="./discount_onproduct.php">Discount on Particular product</a></li>
                         </ul>
                     </div>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="./manage_media.php">
-                    <i class="bi bi-files"></i> Manage Media
+                <li class="nav-item">
+                    <a class="nav-link" href="./analytics.php">
+                    <i class="bi bi-files"></i> Analytics
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="./manage_career.php">
                     <i class="bi bi-files"></i> Manage Career
                     </a>

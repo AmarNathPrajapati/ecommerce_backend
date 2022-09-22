@@ -50,7 +50,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="./crm/backend/user/new_customer.php" method="POST">
+                                    <form name="myForm" action="./crm/backend/user/new_customer.php" onsubmit="return validateForm()" method="POST">
                                         <div class="container-fluid p-5">
                                             <div class="row">
                                                 <div class="col-md-10 col-12 offset-md-1">
@@ -426,6 +426,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+    <script>
+        function validateForm(){
+            let returnval = true;
+            var name = document.forms['myForm']["name"].value;
+            let regex = /[0-9]/;
+            if(regex.test(name)){
+                alert("Not a valid Human name");
+                returnval = false;
+            }
+            var phone = document.forms['myForm']["phone"].value;
+            let regex2 = /[a-zA-Z%@#$^&*()]/;
+            if(regex2.test(phone)){
+                alert("Not a valid phone Number");
+                returnval = false;
+            }
+            var password = document.forms['myForm']["password"].value;
+            let regex3 = /[a-z][A-Z][0-9][!@#$%^&*]/;
+            if(regex3.test(password)){
+                alert("Not a valid phone Number");
+                returnval = false;
+            }
+            return returnval;
+        }
+    </script>
 </body>
 
 </html>

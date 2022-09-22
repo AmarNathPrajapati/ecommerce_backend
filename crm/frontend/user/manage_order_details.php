@@ -115,6 +115,34 @@ include("../../backend/config.php");
                                 <!-- Title -->
                                 <h1 class="h2 mb-0 ls-tight">Order Details</h1>
                             </div>
+                            <div class="mb-3">
+
+
+        <!-- <label for="category_name" class="form-label">Order Status</label><br> -->
+        <!-- dynamic categories -->
+        <!-- <select required name="category" id="category_name"> -->
+            <!-- <option disabled selected>Select Order Status</option> -->
+            <?php
+            $stmt = "SELECT id,order_status FROM `order_status` WHERE order_status.deleted_at IS NULL ORDER BY created_at DESC";
+            $sql = mysqli_prepare($conn, $stmt);
+            $result = mysqli_stmt_execute($sql);
+            if ($result) {
+                $data = mysqli_stmt_get_result($sql);
+                $status_arr=array();
+                $i = 0;
+                while ($row = mysqli_fetch_array($data)) {
+                $status_arr[$i] = $row['order_status'];
+            ?>
+                   
+            <?php
+            $i++;
+                }
+            }
+            ?>
+        <!-- </select> -->
+    </div>
+
+
 
                         </div>
                         <!-- Nav -->
@@ -178,13 +206,13 @@ include("../../backend/config.php");
                                     <tr>
                                         <th style="font-size: 16px;">Sno</th>
                                         <th style="font-size: 16px;">
-                                            Customer Name</th>
+                                            Customer <br> Name</th>
                                         <th style="font-size: 16px;">
-                                            Product Name</th>
+                                            Product <br> Name</th>
                                         <th style="font-size: 16px;">
                                             Order <br> Quantity</th>
                                         <th style="font-size: 16px;">
-                                            Order Status</th>
+                                            Order <br> Status</th>
                                         <th style="font-size: 16px;">Order time</th>
                                         <th style="font-size: 16px;">Action</th>
                                     </tr>
@@ -230,8 +258,8 @@ include("../../backend/config.php");
 
 
 
-                                                    <button type="submit" class="btn btn-outline-primary text-danger-hover p-2" onclick="setId(<?php echo $row['order_id']; ?>,'<?php echo $row['order_status']; ?>')" style="font-size: 14px; margin-left: 10px;">
-                                                        <span style="font-size: 14px;">Edit</span>
+                                                    <button type="submit" class="btn btn-outline-primary text-danger-hover p-2" onclick="setId(<?php echo $row['order_id']; ?>)" style="font-size: 14px; margin-left: 10px;">
+                                                        <span style="font-size: 14px;">Change Order Status</span>
                                                     </button>
 
 
@@ -264,7 +292,7 @@ include("../../backend/config.php");
             </main>
         </div>
     </div>
-
+    
     <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
@@ -277,28 +305,20 @@ include("../../backend/config.php");
                         <div class="mb-2 d-none">
                             <input type="number" name="service_id" class="form-control service_id" hidden readonly required>
                         </div>
-                        <!-- <div class="mb-3">
-                            <label for="category_name" class="form-label">Order Status</label><br>
-                            <select required name="service_name" id="category_name">
-                                <option disabled selected>Select Order Status</option>
-                                <?php
-                                // $stmt = "SELECT id,order_status FROM `order_status` WHERE order_status.deleted_at IS NULL ORDER BY created_at DESC";
-                                // $sql = mysqli_prepare($conn, $stmt);
-                                // $result = mysqli_stmt_execute($sql);
-                                // if ($result) {
-                                //     $data = mysqli_stmt_get_result($sql);
-                                //     while ($row = mysqli_fetch_array($data)) {
-                                // ?>
-                                //         <option value="<?php //echo $row['order_status']; ?>"><?php echo $row['order_status']; ?></option>
-                                // <?php
-                                //     }
-                                // }
-                                ?>
-                            </select>
-                        </div> -->
-                        <div class="mb-2">
-                            <input type="text" name="service_name" class="form-control edit service_name" required id="" placeholder="Enter Order Details Name">
-                        </div>
+                        <label class="my-2" for="">Change Order status</label> <br>
+                        <select  class="form-control edit service_name"   name="service_name" id="">
+                           <?php
+                            foreach ($status_arr as $value) { 
+                           ?>
+                            <option value="<?php
+                                echo $value;
+                            ?>"><?php
+                                echo $value;
+                            ?></option>
+                           <?php
+                                }
+                           ?>
+                        </select>
 
                     </div>
                     <div class="modal-footer">
@@ -336,15 +356,14 @@ include("../../backend/config.php");
 
 
     <script>
-        function setId(id, service_name) {
+        function setId(id) {
 
-            if (id == "" || id == null || service_name == "" || service_name == null) {
+            if (id == "" || id == null) {
                 alert("Something went wrong");
                 window.location.reload();
             }
 
             document.getElementsByClassName('service_id')[0].value = id;
-            document.getElementsByClassName('edit service_name')[0].value = service_name;
             $('#editModal').modal('show');
 
 

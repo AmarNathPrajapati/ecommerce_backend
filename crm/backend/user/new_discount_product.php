@@ -4,32 +4,30 @@ include('../config.php');
 
 
 if (true) {
-    $id = test_input($_POST["id"]);
     $category = test_input($_POST["category"]);
-    $dis_per = test_input($_POST["dis_per"]);
     $currency = test_input($_POST["currency"]);
-    $dis_value = test_input($_POST["dis_value"]);
-    $total_value = test_input($_POST["total_value"]);
+    $dis_type = test_input($_POST["dis_type"]);
+    $value_per = test_input($_POST["value_per"]); 
     $start_date = test_input($_POST["start_date"]);
     $end_date = test_input($_POST["end_date"]);
     $from_location = $_SERVER['HTTP_REFERER'];
 
 
-    $stmt = "UPDATE `discount_order` SET category = ?,dis_per = ?,currency = ?,dis_value = ?,total_value = ?,start_date = ?,end_date = ? where id = ?";
+    $stmt = "INSERT INTO `discount_order` (category,currency,dis_type,value_per,start_date,end_date) VALUES (?,?,?,?,?,?)";
     $sql = mysqli_prepare($conn, $stmt);
-    mysqli_stmt_bind_param($sql, 'sisiissi', $category, $dis_per, $currency, $dis_value, $total_value, $start_date, $end_date,$id);
+    mysqli_stmt_bind_param($sql, 'sssiss', $category, $currency, $dis_type, $value_per, $start_date, $end_date);
     $result = mysqli_stmt_execute($sql);
     if ($result) {
         mysqli_stmt_close($sql);
- 
+
 ?>
         <script>
-            alert("Successfully!! Updated.");
-            window.location.href = "../../frontend/user/discount_order.php";
+            alert("Successfully!! Created.");
+            window.location.href = "../../frontend/user/discount_onproduct.php";
         </script>
     <?php } else {
         mysqli_stmt_close($sql);
-    ?>
+    ?> 
         <script>
             alert('Sorry Something Went Wrong. Please try again.');
             history.back();

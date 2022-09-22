@@ -582,7 +582,7 @@
                 <div class="panel__content">
                     <h3 class="panel__title" style="color: black;">New here ?</h3>
                     <p class="panel__paragraph" style="color: black;">
-                    Welcome to Oremus Corporate Services. You are just a step away to login and get more details.
+                    Welcome to Ecommerce. You are just a step away to login and get more details.
                     </p>
                     <!-- <button class="btn" style="background-color: #FF3859; border: 0px;" id="sign-up-btn">
                         Sign Up
